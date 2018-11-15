@@ -7,16 +7,16 @@ convert_to_rdata <- function() {
   species <- read.csv(paste0(path,"speciesID.csv"),header=TRUE)
   # reads in Foodweb structure
   foodweb <- read.table(paste0(path,"GB_KeyRun_FW.dat"))
-  names(foodweb) <- species$speciesName
-  row.names(foodweb) <- species$speciesName
+  names(foodweb) <- species$commonName
+  row.names(foodweb) <- species$commonName
 
   # read in initial values
   initialValues <- read.table(paste0(path,"GB_KeyRun_InitVal.dat"))
-  row.names(initialValues) <- species$speciesName
+  row.names(initialValues) <- species$commonName
 
   # read in parameter values
   parameterValues <- read.table(paste0(path,"GB_KeyRun_Params_SMAX2011_Linf.dat"))
-  row.names(parameterValues) <- species$speciesName
+  row.names(parameterValues) <- species$commonName
   names(parameterValues) <- c("k","Linf","Lmat","kappa","wa","wb","Smax","IsFished")
 
 
