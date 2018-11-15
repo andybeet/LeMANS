@@ -1,23 +1,23 @@
-Rochet_Species_Number,Hall_Species_Num,speciesName,speciesScientific,guild
-1,22,Forage Fish,latin name,Planktivore
-2,15,Spiny dogfish,Squalus acanthius,Piscivore
-3,17,Winter skate,Raja ocellata,Piscivore
-4,10,Little skate,Leucoraja erinacea,Macrozoo-Piscivore
-5,3,Atlantic herring,Clupea harenegus,Planktivore
-6,12,Silver hake,Merlucius bilinearis,Piscivore
-7,21,Atlantic cod,Gadus morhua,Piscivore
-8,14,Haddock,Melanogrammus aeglefinnus,Benthivore
-9,16,Pollock,Pollachius virens,Macrozoo-Piscivore
-10,19,White hake,Urophycis tenuis,Piscivore
-11,11,Red hake,Urophycis chuss,Macrozoo-Piscivore
-12,8,Fourspot flounder,Paralichthys oblongus,Piscivore
-13,20,Summer flounder,Paralichthys dentatus,Piscivore
-14,9,Yellowtail founder,Limanda ferruginai,Benthivore
-15,6,Winter flounder,Pseaudopleurinectes americanus,Benthivore
-16,4,Witch flounder,Glyptocephalus cynoglossus,Benthivore
-17,5,Windowpane flounder,Scophthalmus aquosus,Macrozoo-Piscivore
-18,7,Atlantic mackerel,Scomber scombrus,Planktivore
-19,2,Longhorn sculpin,Myoxocephalus octdecemspinosus,Macrozoo-Piscivore
-20,13,Sea raven,Hemitripterus americanus,Piscivore
-21,18,Goosefish,Lophius americanus,Piscivore
-22,1,Sandlance,Ammodytes americanus,Planktivore
+speciesNumber,commonName,scientificName,speciesGuild
+1,Forage Fish,latin name,Planktivore
+2,Spiny dogfish,Squalus acanthius,Piscivore
+3,Winter skate,Raja ocellata,Piscivore
+4,Little skate,Leucoraja erinacea,Macrozoo-Piscivore
+5,Atlantic herring,Clupea harenegus,Planktivore
+6,Silver hake,Merlucius bilinearis,Piscivore
+7,Atlantic cod,Gadus morhua,Piscivore
+8,Haddock,Melanogrammus aeglefinnus,Benthivore
+9,Pollock,Pollachius virens,Macrozoo-Piscivore
+10,White hake,Urophycis tenuis,Piscivore
+11,Red hake,Urophycis chuss,Macrozoo-Piscivore
+12,Fourspot flounder,Paralichthys oblongus,Piscivore
+13,Summer flounder,Paralichthys dentatus,Piscivore
+14,Yellowtail founder,Limanda ferruginai,Benthivore
+15,Winter flounder,Pseaudopleurinectes americanus,Benthivore
+16,Witch flounder,Glyptocephalus cynoglossus,Benthivore
+17,Windowpane flounder,Scophthalmus aquosus,Macrozoo-Piscivore
+18,Atlantic mackerel,Scomber scombrus,Planktivore
+19,Longhorn sculpin,Myoxocephalus octdecemspinosus,Macrozoo-Piscivore
+20,Sea raven,Hemitripterus americanus,Piscivore
+21,Goosefish,Lophius americanus,Piscivore
+22,Sandlance,Ammodytes americanus,Planktivore
