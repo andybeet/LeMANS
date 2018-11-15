@@ -1,11 +1,12 @@
 Package: LeMANS
 Type: Package
-Title: What the Package Does (Title Case)
+Title: length-based multispecies analysis by numerical simulation (LeMANS)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: person("Andy","Beet",email="andrew.beet@noaa.gov",role=c("aut","cre"))
+Maintainer: Andy Beet <andrew.beet@noaa.gov>
+Description: An implementation of the LeMANS model as described in the Hall et al (2006) and Roche et al (2011) publications.
+    Additional modification have been implemented.
+    Muliple fleets, allowing for stockasticity, differnt forms for recruitment
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
