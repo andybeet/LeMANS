@@ -6,7 +6,7 @@
 #'
 #'
 #'
-#'
+#'@export
 
 
 
@@ -14,8 +14,8 @@
 # initialValues, parameterValues, species, foodweb
 lemans <- function() {
   # initial set up
-  numSizeClass <- dim(initialValues)[2]
-  numSpecies <- dim(initialValues)[1]
+  nSizeClass <- dim(initialValues)[2]
+  nSpecies <- dim(initialValues)[1]
   otherFood <- 55000000 # (grams)
   convertCatch <- 3046527 # number of tows: converts catch per tow to total numbers
   predationFlag <- 1 # turns off/on predation
@@ -34,16 +34,18 @@ lemans <- function() {
   cM1 <- 0.35 #scaling of final M1
   # Calculate upper and lower size class bins
   maxFishSize <- max(parameterValues$Linf) * 1.001
-  lowerSizeClassInterval <- seq(from=0,to=maxFishSize-maxFishSize/numSizeClass,length.out = numSizeClass)
-  upperSizeClassInterval <- lowerSizeClassInterval + maxFishSize/numSizeClass
+  lowerSizeClassInterval <- seq(from=0,to=maxFishSize-maxFishSize/nSizeClass,length.out = nSizeClass)
+  upperSizeClassInterval <- lowerSizeClassInterval + maxFishSize/nSizeClass
   midSizeClassInterval <- lowerSizeClassInterval + (upperSizeClassInterval-lowerSizeClassInterval)/2
   # transpose foodweb. predator on rows, prey columns
   FW <- t(foodweb)*predationFlag
   N <- t(initialValues)
   N <- N*convertCatch
 
+  # calculate the proportion leaving each size class per time step
+  phi <- calc_phi(nSizeClass,nSpecies,upperSizeClassInterval,lowerSizeClassInterval)
 
 
-
+  return(phi)
 
 }
