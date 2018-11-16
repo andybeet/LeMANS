@@ -17,7 +17,8 @@ lemans <- function() {
   numSizeClass <- dim(initialValues)[2]
   numSpecies <- dim(initialValues)[1]
   otherFood <- 55000000 # (grams)
-  convertCatch <- 3046527 # catch per tow to total numbers
+  convertCatch <- 3046527 # number of tows: converts catch per tow to total numbers
+  predationFlag <- 1 # turns off/on predation
   # Fishing Parameters
   Falpha <- 0.25 # Steepness of selctivity curve
   FL50 <- 25 # Length at 50% selection
@@ -36,7 +37,10 @@ lemans <- function() {
   lowerSizeClassInterval <- seq(from=0,to=maxFishSize-maxFishSize/numSizeClass,length.out = numSizeClass)
   upperSizeClassInterval <- lowerSizeClassInterval + maxFishSize/numSizeClass
   midSizeClassInterval <- lowerSizeClassInterval + (upperSizeClassInterval-lowerSizeClassInterval)/2
-
+  # transpose foodweb. predator on rows, prey columns
+  FW <- t(foodweb)*predationFlag
+  N <- t(initialValues)
+  N <- N*convertCatch
 
 
 
