@@ -3,7 +3,7 @@
 #' starting conditions for all species in each of the species size classes
 #'
 #' @format A data frame of size 22 x 15
-#' \describe{abundance (# of individuals) in each species size class. Size classes are of equal lengt, the width determined by Linf (cm).
+#' \describe{abundance (#catch per tow) in each species size class. Size classes are of equal length; the width (cm) determined by Linf.
 #' Species in rows, size classes in columns.
 #' The list of species can be found in \code{\link{species}} and in the references below
 #'}
