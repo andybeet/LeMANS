@@ -32,3 +32,42 @@ calc_phi <- function(nSize,nSpecies,uBound,lBound){
   return(list(phiMin=phiMin,probGrowOut=probGrowOut))
 }
 
+# Calculates the ration for a species in a size class
+# The ration is the amount that must be consumed by a predator in size class to account for growth
+# see Predation Mortality (M2) p1349 of Hall et al
+# uses von bertalanfy growth equation and growth efficiency
+calc_ration <- function(nSize,nSpecies,uBound,lBound,midBound,phiMin){
+  # dumb loop. Eventually change this
+
+  # find Size class at which each species reaches Linf
+  scLinf <- sapply(parameterValues$Linf,function(x) {which((x>lBound) & (x<=uBound))})
+
+  wgt <- matrix(data=0,nrow=nSize,ncol=nSpecies)
+  gEff <- matrix(data=0,nrow=nSize,ncol=nSpecies)
+  ration <- matrix(data=0,nrow=nSize,ncol=nSpecies)
+  # loop over species and theri maximum size class
+  for (isp in 1:nSpecies) {
+    for (jsc in 1:(scLinf[isp]-1)){
+
+      L1 <- midBound[jsc] # initial Length
+      W1 <- parameterValues$wa[isp] * (L1^parameterValues$wb[isp]) # initial weight
+      wgt[jsc,isp] <- W1 # return this for other functions
+
+      # change in length in unit interval of time
+      deltaL <- (parameterValues$Linf[isp] - midBound[jsc]) * (1 - exp(-parameterValues$k[isp]*phiMin))
+      L2 <- midBound[jsc] + deltaL # length after time unit
+      W2 <- parameterValues$wa[isp] * (L2^parameterValues$wb[isp]) # weight after time unit
+      changeInWeight <- W2-W1
+      WInf <- parameterValues$wa[isp] * (parameterValues$Linf[isp]^parameterValues$wb[isp])
+
+      # growth efficiency
+      gEff[jsc,isp] <- (1-(W1/WInf)^.11)*0.5 # see paper
+
+      ration[jsc,isp] <- changeInWeight/gEff[jsc,isp]
+
+    }
+  }
+
+
+  return(list(ration=ration,scLinf=scLinf,wgt=wgt,gEff=gEff))
+}
