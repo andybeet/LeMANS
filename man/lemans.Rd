@@ -2,10 +2,15 @@
 % Please edit documentation in R/lemans.R
 \name{lemans}
 \alias{lemans}
-\title{LeMANS program}
+\title{LeMANS (Length-based Multispecies Analysis by numerical Simulation)}
 \usage{
 lemans()
 }
 \description{
-Runs the LeMANS model given the users specification for data need
+Runs the LeMANS model. currently loads Rochet et al data when package loads
+The code was adapted directly from the MATLAB code used in the
+Hall et al and Rochet et al papers
+}
+\seealso{
+\code{\link{species}}, \code{\link{foodweb}}, \code{\link{parameterValues}}, \code{\link{initialValues}}
 }
