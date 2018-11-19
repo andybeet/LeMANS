@@ -50,7 +50,15 @@ lemans <- function() {
   # calculate the ration.
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
   # calculate maturity
-  mature <- calc_maturity(nSizeClass,nSpecies,uppScBin,ration$scLinf,scLinfMat)
+  mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat)
+  # calculate recruitment. Assumes all has a ricker form. All are scaled.
+  # see Hall et al paper
+  recruitAlphas <- exp(alphaInt - abs(alphaExp*log(parameterValues$Linf)))
+  recruitBetas <- exp(betaInt - betaExp*log(parameterValues$Smax*SmaxScale))
+  recruitAlphas[1] <- 400 # trial for forage fish
+
+
+
 
   return(mature)
 
