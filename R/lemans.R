@@ -47,6 +47,7 @@ lemans <- function() {
   # calculate the ration.
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
 
+
   return(ration)
 
 }
