@@ -1,18 +1,20 @@
-#'LeMANS program
+#'LeMANS (Length-based Multispecies Analysis by numerical Simulation)
 #'
-#'Runs the LeMANS model given the users specification for data need
+#'Runs the LeMANS model. currently loads Rochet et al data when package loads.
+#'The code was adapted directly from MATLAB code used for the
+#'Hall et al and Rochet et al papers.
 #'
 #'
 #'
 #'
-#'
+#'@seealso \code{\link{species}}, \code{\link{foodweb}}, \code{\link{parameterValues}}, \code{\link{initialValues}}
 #'@export
 
 
 
 # Note: all data fines are read in to memory when package is loaded
 # initialValues, parameterValues, species, foodweb
-lemans <- function() {
+lemans <- function(Ffull) {
   # initial set up
   nSizeClass <- dim(initialValues)[2]
   nSpecies <- dim(initialValues)[1]
@@ -79,9 +81,12 @@ lemans <- function() {
   M2PrefSuit <- calc_sizePref_suitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
   ##################################################################
   # calculates the fishing mortalities
-
+  # this will be extended to deal with more than one fleet
+  eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin)
   ##################################################################
   # calculates the predation mortalities
+
+
   ##################################################################
   ##################################################################
   ##################################################################
@@ -97,6 +102,6 @@ lemans <- function() {
   ##################################################################
 
 
-  return(M2PrefSuit)
+  return(eF)
 
 }
