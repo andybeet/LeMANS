@@ -42,12 +42,16 @@ lemans <- function() {
   N <- t(initialValues)
   N <- N*convertCatch
 
+  #logical matrix reperesnteing size class bins applicable for each species
+  scLinfMat <- sapply(parameterValues$Linf,function(x) {x>lowScBin})
+
   # calculate the proportion leaving each size class per time step
   phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin)
   # calculate the ration.
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
+  # calculate maturity
+  mature <- calc_maturity(nSizeClass,nSpecies,uppScBin,ration$scLinf,scLinfMat)
 
-
-  return(ration)
+  return(mature)
 
 }

@@ -78,10 +78,46 @@ calc_ration <- function(nSize,nSpecies,uBound,lBound,midBound,phiMin){
       gEff[jsc,isp] <- (1-(W1/WInf)^.11)*0.5 # see paper
 
       ration[jsc,isp] <- changeInWeight/gEff[jsc,isp]
-
     }
   }
-
-
-  return(list(ration=ration,scLinf=scLinf,wgt=wgt,gEff=gEff))
+ return(list(ration=ration,scLinf=scLinf,wgt=wgt,gEff=gEff))
 }
+
+# Returns an nSize nSpecie smatrix indicating the proportion of each size
+# class for each species that is mature and contribute to SSB.
+calc_maturity <- function(nSize,nSpecies,midBound,scLinf,scLinfMat){
+
+  kappaMat <- outer(rep(1,nSize),parameterValues$kappa)
+  LmatMat <- outer(rep(1,nSize),parameterValues$Lmat)
+  midMat <- outer(midBound,rep(1,nSpecies))
+
+  maturity <- 1/(1+exp(-kappaMat*(midMat-LmatMat)))
+  maturity <- maturity*scLinfMat # multiplies by binary matrix
+
+  # ugly loop . for testing get rid of it!!
+    # maturity <- matrix(data=0,nrow = nSize,ncol=nSpecies)
+  # for (isp in 1:nSpecies){
+  #   for (jsc in 1:scLinf[isp]) {
+  #
+  #     if (jsc == scLinf[isp]) {
+  #       maturity[jsc,isp] <- 1
+  #     } else {
+  #       kappa <- parameterValues$kappa[isp]
+  #       Lmat <- parameterValues$Lmat[isp]
+  #       maturity[jsc,isp] <- 1/(1+exp(-kappa*(midBound[jsc]-Lmat)))
+  #     }
+  #
+  #   }
+  # }
+
+
+  return(maturity)
+}
+
+
+
+
+
+
+
+
