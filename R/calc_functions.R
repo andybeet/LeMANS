@@ -150,7 +150,7 @@ calc_M1 <- function(nSize,nSpecies,lBound,mBound,alphaM1,betaM1,cM1,scLinfMat,sc
 # for predator of size i, species j, and prey size k species l.
 #  Modified by J. Collie on 17-juin-09 to omit the standardization
 # then calculates standardized suitability based on foodweb matirx
-calc_sizePrefAndSuitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scLinf,FW) {
+calc_sizePref_suitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scLinf,FW) {
   # should vectorize operations. # do later
 
   sizePref <- array(data=0,dim=c(nSize,nSpecies,nSize,nSpecies))

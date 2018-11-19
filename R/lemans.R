@@ -76,7 +76,7 @@ lemans <- function() {
   M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin)
   ##################################################################
   # calculated the size preference and the suitabilities
-  M2PrefSuit <- calc_sizePrefAndSuitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
+  M2PrefSuit <- calc_sizePref_suitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
   ##################################################################
   # calculates the fishing mortalities
 
@@ -97,6 +97,6 @@ lemans <- function() {
   ##################################################################
 
 
-  return(M2Prefs)
+  return(M2PrefSuit)
 
 }
