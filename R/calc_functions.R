@@ -88,7 +88,7 @@ calc_ration <- function(nSize,nSpecies,uBound,lBound,midBound,phiMin){
 ####################################################################################
 # Returns an nSize nSpecie smatrix indicating the proportion of each size
 # class for each species that is mature and contribute to SSB.
-calc_maturity <- function(nSize,nSpecies,midBound,scLinfMat){
+calc_maturity <- function(nSize,nSpecies,midBound,scLinfMat,scLinf){
 
   # creates matrix form. Matrix operations to avoid looping
   kappaMat <- outer(rep(1,nSize),parameterValues$kappa)
@@ -96,23 +96,13 @@ calc_maturity <- function(nSize,nSpecies,midBound,scLinfMat){
   midMat <- outer(midBound,rep(1,nSpecies))
 
   maturity <- 1/(1+exp(-kappaMat*(midMat-LmatMat)))
-  maturity <- maturity*scLinfMat # multiplies by binary matrix
 
-  # ugly loop . for testing get rid of it!!
-    # maturity <- matrix(data=0,nrow = nSize,ncol=nSpecies)
-  # for (isp in 1:nSpecies){
-  #   for (jsc in 1:scLinf[isp]) {
-  #
-  #     if (jsc == scLinf[isp]) {
-  #       maturity[jsc,isp] <- 1
-  #     } else {
-  #       kappa <- parameterValues$kappa[isp]
-  #       Lmat <- parameterValues$Lmat[isp]
-  #       maturity[jsc,isp] <- 1/(1+exp(-kappa*(midBound[jsc]-Lmat)))
-  #     }
-  #
-  #   }
-  # }
+  # all in laast class are mature
+  for (isp in 1:nSpecies){
+    maturity[scLinf[isp],isp] <- 1
+  }
+
+  maturity <- maturity*scLinfMat # multiplies by binary matrix
 
 
   return(maturity)
@@ -228,10 +218,44 @@ calc_M2 <- function(nSize,nSpecies,N,ration,suitability,phiMin,otherFood){
       }
     }
   }
+  M2 <- M2*phiMin
+
+  # place holder for M2_denom in case need to implement this
   M2_denom=NULL
 
   return(list(M2=M2,M2_denom=M2_denom))
 }
+
+
 ####################################################################################
+# Calculates the numbers for each species in each
+#  size class  for the next time step.
+
+calc_population_growth <- function(nSize,nSpecies,N,probGrowOut){
+  # N and probGrowout are matrices of size nsize*nSpecies
+  # the population size in a class is the sum of the % that stay + % that grow out of previous class
+  stay <- (1-probGrowOut)*N
+  leave <- probGrowOut*N
+
+  updatedN <- stay + rbind(rep(0,nSpecies),head(leave,-1))
+  return(updatedN)
+}
+
+####################################################################################
+# Returns SSB and Recruits.
+# Calculates the recruits from the SSB
+calc_recruits <- function(N,maturity,wgt,recAlpha,recBeta){
+  # this will eventually be generalized
+
+  # SSB= proportion of mature individuals*number of individuals * their weight
+  SSB <- colSums(maturity*N*wgt)  #(unit = grams)
+  print(maturity)
+  SSB <- SSB/1e9 #(1000's tonnes')
+  # Ricker Stock recruitment curve
+  recruits <- recAlpha*SSB*exp(-recBeta*SSB)
+  recruits <- recruits*1e6 # number of individuals.
+
+  return(list(recruits=recruits,SSB=SSB))
+}
 ####################################################################################
 ####################################################################################
