@@ -85,7 +85,7 @@ lemans <- function(Ffull) {
   eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin)
   ##################################################################
   # calculates the predation mortalities
-
+  M2 <- calc_M2(nSizeClass,nSpecies,N,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
 
   ##################################################################
   ##################################################################
@@ -102,6 +102,6 @@ lemans <- function(Ffull) {
   ##################################################################
 
 
-  return(eF)
+  return(M2)
 
 }
