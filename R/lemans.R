@@ -59,14 +59,14 @@ lemans <- function(Ffull) {
   ##################################################################
 
   ##################################################################
-  # calculate the proportion leaving each size class per time step
+  # calculate the proportion leaving each size class per time step, and time step
   phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin)
   ##################################################################
-  # calculate the ration.
+  # calculate the ration, weight, efficiency and largest size class
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
   ##################################################################
   # calculate maturity
-  mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat)
+  mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat,ration$scLinf)
   ##################################################################
   # calculate recruitment. Assumes all has a ricker form. All are scaled.
   # see Hall et al paper
@@ -85,23 +85,29 @@ lemans <- function(Ffull) {
   eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin)
   ##################################################################
   # calculates the predation mortalities
-  M2 <- calc_M2(nSizeClass,nSpecies,N,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
-
-  ##################################################################
-  ##################################################################
-  ##################################################################
+  M2calcs <- calc_M2(nSizeClass,nSpecies,N,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
   ##################################################################
 
-
-  ##################################################################
   ##################################################################
   ##################################################################
   # Now run the model
+  nRuns <- 1
+  catch <- array(data=0,dim=c(nSizeClass,nSpecies,nRuns))
+  ##################################################################
+  numberDead <- N*(1-exp(-(eF+M1+M2calcs$M2)))
+  numberRemain <- N-numberDead
+  # proportion dead due to fishing
+  catch[,,1] <- (eF/(eF+M1+M2calcs$M2)) * numberDead
+  ##################################################################
+  # calculate the growth of individuals
+  updatedN <- calc_population_growth(nSizeClass,nSpecies,numberRemain,phi$probGrowOut)
+  # calculates recruits and SSB
+  recruits <- calc_recruits(updatedN,mature,ration$wgt,recruitAlphas,recruitBetas)
   ##################################################################
   ##################################################################
   ##################################################################
 
 
-  return(M2)
+  return(recruits)
 
 }
