@@ -56,10 +56,11 @@ lemans <- function() {
   recruitAlphas <- exp(alphaInt - abs(alphaExp*log(parameterValues$Linf)))
   recruitBetas <- exp(betaInt - betaExp*log(parameterValues$Smax*SmaxScale))
   recruitAlphas[1] <- 400 # trial for forage fish
+  # calculate M1 (residual natural mortality)
+  M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin)
 
 
 
-
-  return(mature)
+  return(M1)
 
 }
