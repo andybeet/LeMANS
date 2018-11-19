@@ -41,26 +41,62 @@ lemans <- function() {
   FW <- t(foodweb)*predationFlag
   N <- t(initialValues)
   N <- N*convertCatch
+  # size prefernce function Parameters
+  spMu <- 0.5
+  spSigma <- 2
 
   #logical matrix reperesnteing size class bins applicable for each species
   scLinfMat <- sapply(parameterValues$Linf,function(x) {x>lowScBin})
 
+  ##################################################################
+  ##################################################################
+  ##################################################################
+  # Now calculate all parts required to run model
+  ##################################################################
+  ##################################################################
+  ##################################################################
+
+  ##################################################################
   # calculate the proportion leaving each size class per time step
   phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin)
+  ##################################################################
   # calculate the ration.
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
+  ##################################################################
   # calculate maturity
   mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat)
+  ##################################################################
   # calculate recruitment. Assumes all has a ricker form. All are scaled.
   # see Hall et al paper
   recruitAlphas <- exp(alphaInt - abs(alphaExp*log(parameterValues$Linf)))
   recruitBetas <- exp(betaInt - betaExp*log(parameterValues$Smax*SmaxScale))
   recruitAlphas[1] <- 400 # trial for forage fish
+  ##################################################################
   # calculate M1 (residual natural mortality)
   M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin)
+  ##################################################################
+  # calculated the size preference and the suitabilities
+  M2PrefSuit <- calc_sizePrefAndSuitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
+  ##################################################################
+  # calculates the fishing mortalities
+
+  ##################################################################
+  # calculates the predation mortalities
+  ##################################################################
+  ##################################################################
+  ##################################################################
+  ##################################################################
 
 
+  ##################################################################
+  ##################################################################
+  ##################################################################
+  # Now run the model
+  ##################################################################
+  ##################################################################
+  ##################################################################
 
-  return(M1)
+
+  return(M2Prefs)
 
 }

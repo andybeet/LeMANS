@@ -1,6 +1,6 @@
-
 # utility functions unlikely to change
-
+####################################################################################
+####################################################################################
 
 # Calculates the proportion of individuals that leave
 # each size class. Output is scaled relative to the
@@ -32,6 +32,7 @@ calc_phi <- function(nSize,nSpecies,uBound,lBound){
   return(list(phiMin=phiMin,probGrowOut=probGrowOut))
 }
 
+####################################################################################
 # Calculates the ration for a species in a size class
 # The ration is the amount that must be consumed by a predator in size class to account for growth
 # see Predation Mortality (M2) p1349 of Hall et al
@@ -83,6 +84,8 @@ calc_ration <- function(nSize,nSpecies,uBound,lBound,midBound,phiMin){
  return(list(ration=ration,scLinf=scLinf,wgt=wgt,gEff=gEff))
 }
 
+
+####################################################################################
 # Returns an nSize nSpecie smatrix indicating the proportion of each size
 # class for each species that is mature and contribute to SSB.
 calc_maturity <- function(nSize,nSpecies,midBound,scLinfMat){
@@ -115,6 +118,8 @@ calc_maturity <- function(nSize,nSpecies,midBound,scLinfMat){
   return(maturity)
 }
 
+
+####################################################################################
 # calculates other sources of natural mortality other than predation
 # assumption: follows a beta distribution and that the small er the size class the greater the mortality
 # this is based on the ratio of the sizeclass midpoint to the largest sizeclass midpoint (0,1) variable
@@ -131,12 +136,57 @@ calc_M1 <- function(nSize,nSpecies,lBound,mBound,alphaM1,betaM1,cM1,scLinfMat,sc
     x <- midPoint/max(parameterValues$Linf)
     M1[scLinf[isp],isp] <- stats::dbeta(x,alphaM1,betaM1)*cM1
   }
-
-  M1 <- M1*scLinfMat
+  # scaled to time step
+  M1 <- M1*scLinfMat*phiMin
 
   return(M1)
 }
 
 
+####################################################################################
+# Calculates the lognormal probability functions for
+# prey preferences, based on the predator/prey size(wgt) ratio.
+# Returns a 4D matrix with the (prey/predator) body size ratio
+# for predator of size i, species j, and prey size k species l.
+#  Modified by J. Collie on 17-juin-09 to omit the standardization
+# then calculates standardized suitability based on foodweb matirx
+calc_sizePrefAndSuitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scLinf,FW) {
+  # should vectorize operations. # do later
+
+  sizePref <- array(data=0,dim=c(nSize,nSpecies,nSize,nSpecies))
+  suitability <- array(data=0,dim=c(nSize,nSpecies,nSize,nSpecies))
+
+  for (isp in 1:nSpecies) { # predator
+    for (jsp in 1:nSpecies) { # prey.  pair of species to calculate ratios
+
+      for (isize in 1:scLinf[isp]) { # predator
+        for (jsize in 1:min(scLinf[isp],scLinf[jsp])) { # can only eat at least as big as itself
+          ratio <- wgt[jsize,jsp]/wgt[isize,isp]
+          sizePref[isize,isp,jsize,jsp] <- dlnorm(ratio,spMu,spSigma)
+          suitability[isize,isp,jsize,jsp] <- sizePref[isize,isp,jsize,jsp]*FW[isp,jsp]
+        }
+      }
+    }
+  }
+
+  # standardize the suitabilirties so sum to 1 (Hall et al reference to Magnuson (multispecies vpa) 1995)
+  for (isp in 1:nSpecies) {
+    for (isize in 1:scLinf[isp]) {
+      standardize <- sum(suitability[isize,isp,,])
+      if (standardize > 0) { # species is a predator of something
+        suitability[isize,isp,,] <- suitability[isize,isp,,]/standardize
+      }
+    }
+  }
 
 
+
+  return(list(sizePref=sizePref,suitability=suitability))
+}
+
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
