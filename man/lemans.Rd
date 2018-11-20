@@ -4,12 +4,12 @@
 \alias{lemans}
 \title{LeMANS (Length-based Multispecies Analysis by numerical Simulation)}
 \usage{
-lemans()
+lemans(Ffull)
 }
 \description{
-Runs the LeMANS model. currently loads Rochet et al data when package loads
-The code was adapted directly from the MATLAB code used in the
-Hall et al and Rochet et al papers
+Runs the LeMANS model. currently loads Rochet et al data when package loads.
+The code was adapted directly from MATLAB code used for the
+Hall et al and Rochet et al papers.
 }
 \seealso{
 \code{\link{species}}, \code{\link{foodweb}}, \code{\link{parameterValues}}, \code{\link{initialValues}}
