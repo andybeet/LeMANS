@@ -14,7 +14,8 @@
 
 # Note: all data fines are read in to memory when package is loaded
 # initialValues, parameterValues, species, foodweb
-lemans <- function(Ffull) {
+lemans <- function(Ffull,nYrs) {
+  start <- Sys.time()
   # initial set up
   nSizeClass <- dim(initialValues)[2]
   nSpecies <- dim(initialValues)[1]
@@ -41,8 +42,8 @@ lemans <- function(Ffull) {
   midScBin <- lowScBin + (uppScBin-lowScBin)/2
   # transpose foodweb. predator on rows, prey columns
   FW <- t(foodweb)*predationFlag
-  N <- t(initialValues)
-  N <- N*convertCatch
+  initN <- t(initialValues)
+  initN <- initN*convertCatch
   # size prefernce function Parameters
   spMu <- 0.5
   spSigma <- 2
@@ -61,6 +62,7 @@ lemans <- function(Ffull) {
   ##################################################################
   # calculate the proportion leaving each size class per time step, and time step
   phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin)
+  print(phi$phiMin)
   ##################################################################
   # calculate the ration, weight, efficiency and largest size class
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
@@ -85,29 +87,67 @@ lemans <- function(Ffull) {
   eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin)
   ##################################################################
   # calculates the predation mortalities
-  M2calcs <- calc_M2(nSizeClass,nSpecies,N,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
+  M2calcs <- calc_M2(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
   ##################################################################
+  # calculate Recruits and SSB
+  recruits <- calc_recruits(initN,mature,ration$wgt,recruitAlphas,recruitBetas)
 
   ##################################################################
+  # preallocate variables
+  nTimeStepsPerYear <- round(1/phi$phiMin)
+  nTimeSteps <- nYrs*nTimeStepsPerYear
+
+  print(nTimeStepsPerYear)
+  print(nTimeSteps)
+  N <- array(data=NA,dim=c(nSizeClass,nSpecies,nTimeSteps))
+  catch <- array(data=NA,dim=c(nSizeClass,nSpecies,nTimeSteps))
+  M2 <- array(data=NA,dim=c(nSizeClass,nSpecies,nTimeSteps))
+  R <- array(data=NA,dim=c(nSpecies,nYrs))
+  SSB <- array(data=NA,dim=c(nSpecies,nYrs))
+
   ##################################################################
   # Now run the model
-  nRuns <- 1
-  catch <- array(data=0,dim=c(nSizeClass,nSpecies,nRuns))
-  ##################################################################
-  numberDead <- N*(1-exp(-(eF+M1+M2calcs$M2)))
-  numberRemain <- N-numberDead
+  # initialize teime step 1
+  iyear <- 1
+  N[,,1] <- initN
+  M2[,,1] <- M2calcs$M2
+  numberDead <- N[,,1]*(1-exp(-(eF+M1+M2[,,1])))
+  numberRemain <- N[,,1]-numberDead
   # proportion dead due to fishing
-  catch[,,1] <- (eF/(eF+M1+M2calcs$M2)) * numberDead
-  ##################################################################
-  # calculate the growth of individuals
+  catch[,,1] <- (eF/(eF+M1+M2[,,1])) * numberDead
+  #population growth
   updatedN <- calc_population_growth(nSizeClass,nSpecies,numberRemain,phi$probGrowOut)
-  # calculates recruits and SSB
-  recruits <- calc_recruits(updatedN,mature,ration$wgt,recruitAlphas,recruitBetas)
-  ##################################################################
+  N[,,1] <- updatedN
+
+  for (istep in 2:nTimeSteps){
+    # calculate the growth of individuals
+    N[,,istep] <- N[,,istep-1]
+
+    # if in last step of the year (end of year) Recruitment event
+    if ((istep %% nTimeStepsPerYear) == 0) {
+      recruits <- calc_recruits(N[,,istep],mature,ration$wgt,recruitAlphas,recruitBetas)
+      R[,iyear] <- recruits$recruits
+      SSB[,iyear] <- recruits$SSB
+      # recruits added to the 1st size class
+      N[1,,istep] <- N[1,,istep] + R[,iyear]
+    }
+
+    # calculate M2 again
+    M2calcs <- calc_M2(nSizeClass,nSpecies,N[,,istep],ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
+    M2[,,istep] <- M2calcs$M2
+    # calculate catch again
+    numberDead <- N[,,istep]*(1-exp(-(eF+M1+M2[,,istep])))
+    catch[,,istep] <- (eF/(eF+M1+M2[,,istep])) * numberDead
+    numberRemain <- N[,,istep]-numberDead
+    updatedN <- calc_population_growth(nSizeClass,nSpecies,numberRemain,phi$probGrowOut)
+    N[,,istep] <- updatedN
+  }
+
+    ##################################################################
   ##################################################################
   ##################################################################
 
-
-  return(recruits)
+  print(Sys.time()-start)
+  return(list(N=N,M2=M2,catch=catch))
 
 }

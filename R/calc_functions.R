@@ -249,7 +249,6 @@ calc_recruits <- function(N,maturity,wgt,recAlpha,recBeta){
 
   # SSB= proportion of mature individuals*number of individuals * their weight
   SSB <- colSums(maturity*N*wgt)  #(unit = grams)
-  print(maturity)
   SSB <- SSB/1e9 #(1000's tonnes')
   # Ricker Stock recruitment curve
   recruits <- recAlpha*SSB*exp(-recBeta*SSB)
