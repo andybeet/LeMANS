@@ -24,3 +24,6 @@ vignettes/*.pdf
 
 # folders
 other
+
+# test files
+*test.R
