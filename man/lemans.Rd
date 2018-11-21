@@ -4,7 +4,7 @@
 \alias{lemans}
 \title{LeMANS (Length-based Multispecies Analysis by numerical Simulation)}
 \usage{
-lemans(Ffull)
+lemans(Ffull, nYrs)
 }
 \description{
 Runs the LeMANS model. currently loads Rochet et al data when package loads.

@@ -22,28 +22,38 @@ lemans <- function(Ffull,nYrs) {
   otherFood <- 55000000 # (grams)
   convertCatch <- 3046527 # number of tows: converts catch per tow to total numbers
   predationFlag <- 1 # turns off/on predation
+  ##################################################################
   # Fishing Parameters
   Falpha <- 0.25 # Steepness of selctivity curve
   FL50 <- 25 # Length at 50% selection
-  #Model Parameters
+  ##################################################################
+  # calculate recruitment. Assumes all has a ricker form. All are scaled.
+  # see Hall et al paper
   alphaInt <- 11 # scaling for Ricker alpha wrt L_inf
   alphaExp <- -2.298 # scaling for Ricker alpha wrt L_inf
   betaInt <- 0.1513 # scaling for Ricker beta wrt Smax
   betaExp <- 0.9484 # scaling for Ricker beta wrt Smax
   SmaxScale <- 1 # Catchability scaling for S.max estimate from survery
-  # M1
-  alphaM1 <- 0.8 # parametes of beta function used to model M1
-  betaM1 <- 0.4 # parametes of beta function used to model M1
+  recruitAlphas <- exp(alphaInt - abs(alphaExp*log(parameterValues$Linf)))
+  recruitBetas <- exp(betaInt - betaExp*log(parameterValues$Smax*SmaxScale))
+  recruitAlphas[1] <- 400 # trial for forage fish
+  ##################################################################
+  # M1 -parametes of beta function used to model M1
+  alphaM1 <- 0.8
+  betaM1 <- 0.4
   cM1 <- 0.35 #scaling of final M1
+  ##################################################################
   # Calculate upper and lower size class bins
   maxFishSize <- max(parameterValues$Linf) * 1.001
   lowScBin <- seq(from=0,to=maxFishSize-maxFishSize/nSizeClass,length.out = nSizeClass)
   uppScBin <- lowScBin + maxFishSize/nSizeClass
   midScBin <- lowScBin + (uppScBin-lowScBin)/2
+  ##################################################################
   # transpose foodweb. predator on rows, prey columns
   FW <- t(foodweb)*predationFlag
   initN <- t(initialValues)
   initN <- initN*convertCatch
+  ##################################################################
   # size prefernce function Parameters
   spMu <- 0.5
   spSigma <- 2
@@ -62,7 +72,6 @@ lemans <- function(Ffull,nYrs) {
   ##################################################################
   # calculate the proportion leaving each size class per time step, and time step
   phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin)
-  print(phi$phiMin)
   ##################################################################
   # calculate the ration, weight, efficiency and largest size class
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
@@ -70,24 +79,23 @@ lemans <- function(Ffull,nYrs) {
   # calculate maturity
   mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat,ration$scLinf)
   ##################################################################
-  # calculate recruitment. Assumes all has a ricker form. All are scaled.
-  # see Hall et al paper
-  recruitAlphas <- exp(alphaInt - abs(alphaExp*log(parameterValues$Linf)))
-  recruitBetas <- exp(betaInt - betaExp*log(parameterValues$Smax*SmaxScale))
-  recruitAlphas[1] <- 400 # trial for forage fish
-  ##################################################################
   # calculate M1 (residual natural mortality)
   M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin)
   ##################################################################
   # calculated the size preference and the suitabilities
   M2PrefSuit <- calc_sizePref_suitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
+  #M2PrefSuit <- calc_sizePref_suitabilityOld(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
+  ##################################################################
+  # calculates the predation mortalities
+  M2calcs <- calc_M2(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
+  #M2calcs <- calc_M2Old(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
+
+
+  #return(list(M2=M2PrefSuit,mBin=midScBin,ration=ration))
   ##################################################################
   # calculates the fishing mortalities
   # this will be extended to deal with more than one fleet
   eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin)
-  ##################################################################
-  # calculates the predation mortalities
-  M2calcs <- calc_M2(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
   ##################################################################
   # calculate Recruits and SSB
   recruits <- calc_recruits(initN,mature,ration$wgt,recruitAlphas,recruitBetas)
@@ -110,7 +118,7 @@ lemans <- function(Ffull,nYrs) {
   # initialize teime step 1
   iyear <- 1
   N[,,1] <- initN
-  M2[,,1] <- M2calcs$M2
+  M2[,,1] <- M2calcs
   numberDead <- N[,,1]*(1-exp(-(eF+M1+M2[,,1])))
   numberRemain <- N[,,1]-numberDead
   # proportion dead due to fishing
@@ -133,8 +141,9 @@ lemans <- function(Ffull,nYrs) {
     }
 
     # calculate M2 again
+    #M2calcs <- calc_M2Old(nSizeClass,nSpecies,N[,,istep],ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
     M2calcs <- calc_M2(nSizeClass,nSpecies,N[,,istep],ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
-    M2[,,istep] <- M2calcs$M2
+    M2[,,istep] <- M2calcs
     # calculate catch again
     numberDead <- N[,,istep]*(1-exp(-(eF+M1+M2[,,istep])))
     catch[,,istep] <- (eF/(eF+M1+M2[,,istep])) * numberDead
