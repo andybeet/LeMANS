@@ -136,13 +136,55 @@ calc_M1 <- function(nSize,nSpecies,lBound,mBound,alphaM1,betaM1,cM1,scLinfMat,sc
 ####################################################################################
 # Calculates the lognormal probability functions for
 # prey preferences, based on the predator/prey size(wgt) ratio.
-# Returns a 4D matrix with the (prey/predator) body size ratio
+# Returns a 3D matrix with the (prey/predator) body size ratio
 # for predator of size i, species j, and prey size k species l.
-#  Modified by J. Collie on 17-juin-09 to omit the standardization
 # then calculates standardized suitability based on foodweb matirx
 calc_sizePref_suitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scLinf,FW) {
   # should vectorize operations. # do later
 
+  # 3 dimensional array to utilize Rcpprmadillo's speed
+  sizePref <- array(data=0,dim=c(nSize*nSpecies,nSize,nSpecies))
+  suitability <- array(data=0,dim=c(nSize*nSpecies,nSize,nSpecies))
+
+  for (isp in 1:nSpecies) { # predator
+    for (isize in 1:scLinf[isp]) { # predator
+      index <- ((isp-1)*nSize)  + isize
+
+      for (jsp in 1:nSpecies) { # prey.  pair of species to calculate ratios
+        for (jsize in 1:min(scLinf[isp],scLinf[jsp])) { # can only eat at least as big as itself
+          ratio <- wgt[jsize,jsp]/wgt[isize,isp]
+          sizePref[index,jsize,jsp] <- dlnorm(ratio,spMu,spSigma)
+          suitability[index,jsize,jsp] <- sizePref[index,jsize,jsp]*FW[isp,jsp]
+        }
+      }
+
+    }
+  }
+
+  # standardize the suitabilirties so sum to 1 (Hall et al reference to Magnuson (multispecies vpa) 1995)
+  for (isp in 1:nSpecies) {
+    for (isize in 1:scLinf[isp]) {
+      index <- ((isp-1)*nSize) + isize
+      standardize <- sum(suitability[index,,])
+      if (standardize > 0) { # species is a predator of something
+        suitability[index,,] <- suitability[index,,]/standardize
+      }
+    }
+  }
+  return(list(sizePref=sizePref,suitability=suitability))
+}
+
+####################################################################################
+# old version with 4d arrays
+# Calculates the lognormal probability functions for
+# prey preferences, based on the predator/prey size(wgt) ratio.
+# Returns a 3D matrix with the (prey/predator) body size ratio
+# for predator of size i, species j, and prey size k species l.
+#  Modified by J. Collie on 17-juin-09 to omit the standardization
+# then calculates standardized suitability based on foodweb matirx
+calc_sizePref_suitabilityOld <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scLinf,FW) {
+
+  # 4 dimensional array
   sizePref <- array(data=0,dim=c(nSize,nSpecies,nSize,nSpecies))
   suitability <- array(data=0,dim=c(nSize,nSpecies,nSize,nSpecies))
 
@@ -198,12 +240,37 @@ calc_F <- function(nSize,nSpecies,mBound,lBound,Ffull,Falpha,FL50,scLinf,scLinfM
 
 
 ####################################################################################
+# 3D array
+# Calculates the predation mortality for each species in each
+# size class and returns an nSize x nSpecies matrix of M2 values.
+calc_M2 <- function(nSize,nSpecies,N,ration,suitability,phiMin,otherFood){
+
+  M2 <- matrix(data=0,nrow = nSize,ncol = nSpecies)
+  # mortality of prey m in size class n
+  for (msp in 1:nSpecies) {  # prey species
+    for (nsz in 1:ration$scLinf[msp]) { # prey size class
+      for (isp in 1:nSpecies) { # predator
+        for (jsz in 1:ration$scLinf[isp]) { # predator size
+          index <- ((isp-1)*nSize) + jsz
+          # mortality is summed over isp and jsize
+          numerator <- ration$ration[jsz,isp]*N[jsz,isp]*suitability[index,nsz,msp]
+          denominator <- sum(suitability[index,,] * ration$wgt * N) + otherFood
+          M2[nsz,msp] <- M2[nsz,msp] + numerator/denominator
+        }
+      }
+    }
+  }
+  M2 <- M2*phiMin
+
+  return(M2)
+}
+
 # Calculates the predation mortality for each species in each
 # size class and returns an nSize x nSpecies matrix of M2 values.
 # Modified by J. Collie on 3-Sep-09.  M2_denom is now used to
 # return the amount of prey consumed by each predator per year
-calc_M2 <- function(nSize,nSpecies,N,ration,suitability,phiMin,otherFood){
-
+calc_M2Old <- function(nSize,nSpecies,N,ration,suitability,phiMin,otherFood){
+  # 4D array. denominator takes a lot of time to execute. ~80% of execution time
   M2 <- matrix(data=0,nrow = nSize,ncol = nSpecies)
   # mortality of prey m in size class n
   for (msp in 1:nSpecies) {  # prey species
@@ -220,10 +287,7 @@ calc_M2 <- function(nSize,nSpecies,N,ration,suitability,phiMin,otherFood){
   }
   M2 <- M2*phiMin
 
-  # place holder for M2_denom in case need to implement this
-  M2_denom=NULL
-
-  return(list(M2=M2,M2_denom=M2_denom))
+  return(M2)
 }
 
 
