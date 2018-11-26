@@ -19,7 +19,7 @@ calc_sizepref_suitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scL
       for (jsp in 1:nSpecies) { # prey.  pair of species to calculate ratios
         for (jsize in 1:min(scLinf[isp],scLinf[jsp])) { # can only eat at least as big as itself
           ratio <- wgt[jsize,jsp]/wgt[isize,isp]
-          sizePref[index,jsize,jsp] <- dlnorm(ratio,spMu,spSigma)
+          sizePref[index,jsize,jsp] <- stats::dlnorm(ratio,spMu,spSigma)
           suitability[index,jsize,jsp] <- sizePref[index,jsize,jsp]*FW[isp,jsp]
         }
       }

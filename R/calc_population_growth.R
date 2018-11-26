@@ -9,6 +9,6 @@ calc_population_growth <- function(nSize,nSpecies,N,probGrowOut){
   stay <- (1-probGrowOut)*N
   leave <- probGrowOut*N
 
-  updatedN <- stay + rbind(rep(0,nSpecies),head(leave,-1))
+  updatedN <- stay + rbind(rep(0,nSpecies),utils::head(leave,-1))
   return(updatedN)
 }
