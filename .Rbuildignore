@@ -2,3 +2,7 @@
 ^\.Rproj\.user$
 ^other$
 ^data-raw$
+
+^test\.R$
+^plot$
+^test2\.R$
