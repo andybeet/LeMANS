@@ -46,7 +46,7 @@ arma::mat calc_M2_c(int nSize, int nSpecies, arma::mat N, arma::vec scLinf, arma
   }
 
 
-  M2 = M2/phiMin;
+  M2 = M2*phiMin;
   //M2 = M2/4.58;
 
   //Rcpp::Rcout << "This is dim of M2 = " << M2.size() << std::endl;

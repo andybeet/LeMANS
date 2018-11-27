@@ -88,8 +88,8 @@ key_run <- function(Ffull,nYrs) {
   #M2PrefSuit <- calc_sizePref_suitabilityOld(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
   ##################################################################
   # calculates the predation mortalities
-  #M2calcs <- calc_M2R(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
-  M2calcs <- calc_M2(nSizeClass,nSpecies,initN,ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,otherFood)
+  #M2calcs <- calc_M2_r(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
+  M2calcs <- calc_M2_c(nSizeClass,nSpecies,initN,ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,otherFood)
 
 
   #eturn(list(M2=M2PrefSuit,mBin=midScBin,ration=ration))
@@ -142,8 +142,8 @@ key_run <- function(Ffull,nYrs) {
     }
 
     # calculate M2 again
-    M2calcs <- calc_M2(nSizeClass,nSpecies,N[,,istep],ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,otherFood)
-#    M2calcs <- calc_M2R(nSizeClass,nSpecies,N[,,istep],ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
+    M2calcs <- calc_M2_c(nSizeClass,nSpecies,N[,,istep],ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,otherFood)
+    #M2calcs <- calc_M2_r(nSizeClass,nSpecies,N[,,istep],ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
     M2[,,istep] <- M2calcs
     # calculate catch again
     numberDead <- N[,,istep]*(1-exp(-(eF+M1+M2[,,istep])))

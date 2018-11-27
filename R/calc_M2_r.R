@@ -14,8 +14,8 @@ calc_M2_r <- function(nSize,nSpecies,N,ration,suitability,phiMin,otherFood){
           # mortality is summed over isp and jsize
           numerator <- ration$ration[jsz,isp]*N[jsz,isp]*suitability[index,nsz,msp]
           denominator <- sum(suitability[index,,] * ration$wgt * N) + otherFood
-          cat("numerator = ",numerator,"\n")
-          cat("denominator = " ,denominator,"\n")
+         # cat("numerator = ",numerator,"\n")
+        #  cat("denominator = " ,denominator,"\n")
         #  invisible(readline("press Enter to continue ..."))
           M2[nsz,msp] <- M2[nsz,msp] + numerator/denominator
         }
