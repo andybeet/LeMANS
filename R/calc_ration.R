@@ -1,9 +1,39 @@
+#'calculate species ration, growth efficiency, and size class weight
+#'
+#' Calculates the ration, weight, and growth efficiency for a species in a size class. Ration is defined as growth increment / growth efficiency
+#'
+#'
+#'@param nSize Number of size class intervals species can grow through
+#'@param nSpecies Number of species in the model
+#'@param uBound upper bound of each size class interval
+#'@param lBound lower bound of each size class interval
+#'@param mBound mid point of each size class interval
+#'@param phiMin Model timestep (years)
+#'
+#'@return A list is returned
+#'
+#'    \code{ration} nSize x nSpecies matrix. (growth in time interval)/growth efficiency
+#'    \code{wgt} Weight of average sized fish (each size class). Uses length weight relationship. See \code{data_parameterValues}
+#'    \code{gEff} nSize x nSpecies matrix. Growth Efficiency of species j in size class i
+#'    \code{scLinf} The size class at which each species reaches L_inf (maximum length)
+#'
+#'
+#'@section References:
+#'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
+#'
+#'Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486
+#'
+#'@export
+
+
+
+
 ####################################################################################
 # Calculates the ration for a species in a size class
 # The ration is the amount that must be consumed by a predator in size class to account for growth
 # see Predation Mortality (M2) p1349 of Hall et al
 # uses von bertalanfy growth equation and growth efficiency
-calc_ration <- function(nSize,nSpecies,uBound,lBound,midBound,phiMin){
+calc_ration <- function(nSize,nSpecies,uBound,lBound,midBound,phiMin,parameterValues){
   # dumb loop. Eventually change this
 
   # find Size class at which each species reaches Linf

@@ -1,4 +1,33 @@
-####################################################################################
+#'calculate predation Mortality
+#'
+#' Calculates the predation mortality for each species in each size
+#' class
+#'
+#'
+#'@param nSize Number of size class intervals species can grow through
+#'@param nSpecies Number of species in the model
+#'@param N an nSize x nSpecies matrix of abundance (number of individuals)
+#'@param ration a list of ration, weight by class, The size class at which each species reaches L_inf (maximum length). see \code{\link{calc_sizepref_suitability}}.
+#'@param suitability a 3D array of predator prey suitabilities. See \code{\link{calc_ration}}
+#'@param phiMin Model timestep (years).
+#'@param otherfood The amount of other food available unaccounted for in the model (grams)
+#'
+#'@return A matrix is returned
+#'
+#'    \code{M2}    - nSize x nSpecies matrix of M2 (predation mortality) values where nSpecies = number of species and nSize = number of size classes.
+#'    Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.
+#'
+#'@seealso \code{\link{calc_sizepref_suitability}}, \code{\link{calc_ration}}
+#'
+#'@section References:
+#'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
+#'
+#'Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486
+#'
+#'@export
+#'
+
+
 # 3D array
 # Calculates the predation mortality for each species in each
 # size class and returns an nSize x nSpecies matrix of M2 values.

@@ -1,14 +1,38 @@
+#'Calculates Maturity
+#'
+#'The proportion of each size class for each species that is mature and contributes to SSB.
+#'
+#'@param nSize Number of size class intervals species can grow through
+#'@param nSpecies Number of species in the model
+#'@param mBound Mid point of each size class interval
+#'@param scLinfMat Binary matrix indicating which size classes each species occupies
+#'@param scLinf The size class at which each species reaches L_inf (maximum length)
+#'@param parameterValues Data. See \code{\link{data_parameterValues}}
 
+#'
+#'@return A matrix is returned
+#'
+#'    \code{Maturity}    - nSize x nSpecies matrix of Maturity proportions where nSpecies = number of species and nSize = number of size classes.
+#'    Note that Maturity_i,j = 0 for size class i in which species j does not reach.
+#'
+#'
+#'@section References:
+#'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
+#'
+#'Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486
+#'
+#'@export
+#'
 
 ####################################################################################
 # Returns an nSize nSpecie smatrix indicating the proportion of each size
 # class for each species that is mature and contribute to SSB.
-calc_maturity <- function(nSize,nSpecies,midBound,scLinfMat,scLinf){
+calc_maturity <- function(nSize,nSpecies,mBound,scLinfMat,scLinf,parameterValues){
 
   # creates matrix form. Matrix operations to avoid looping
   kappaMat <- outer(rep(1,nSize),parameterValues$kappa)
   LmatMat <- outer(rep(1,nSize),parameterValues$Lmat)
-  midMat <- outer(midBound,rep(1,nSpecies))
+  midMat <- outer(mBound,rep(1,nSpecies))
 
   maturity <- 1/(1+exp(-kappaMat*(midMat-LmatMat)))
 
