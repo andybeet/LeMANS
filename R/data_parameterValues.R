@@ -13,9 +13,10 @@
 #'     \item{Smax}{Maximum observed spawning stock biomass (kg)}
 #'     \item{IsFished}{Flag indicating if a species is fished or not}
 #'}
-#' The list of species can be found in \code{\link{species}} and in the references below
-#'@seealso \code{\link{foodweb}}, \code{\link{initialValues}}, \code{\link{parameterValues}}, \code{\link{species}}
+#' The list of species can be found in \code{\link{data_species}} and in the references below
 #'
-#'@source Halle et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63: 1344-1359
+#'@seealso \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+#'
+#'@source Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63: 1344-1359
 #'@source Rochet et al. (2011). Does selective fishing conserve community biodiversiy? Predictions from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68: 469-486
-"parameterValues"
+"data_parameterValues"
