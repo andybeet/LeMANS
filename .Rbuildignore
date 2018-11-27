@@ -4,5 +4,6 @@
 ^data-raw$
 
 ^test\.R$
-^plot$
 ^test2\.R$
+^plot$
+

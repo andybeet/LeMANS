@@ -6,9 +6,9 @@
 
 using namespace Rcpp;
 
-// calc_M2
-SEXP calc_M2(int nSize, int nSpecies, arma::mat N, arma::vec scLinf, arma::mat ration, arma::mat wgt, arma::cube suitability, double phiMin, double otherFood);
-RcppExport SEXP _LeMANS_calc_M2(SEXP nSizeSEXP, SEXP nSpeciesSEXP, SEXP NSEXP, SEXP scLinfSEXP, SEXP rationSEXP, SEXP wgtSEXP, SEXP suitabilitySEXP, SEXP phiMinSEXP, SEXP otherFoodSEXP) {
+// calc_M2_c
+arma::mat calc_M2_c(int nSize, int nSpecies, arma::mat N, arma::vec scLinf, arma::mat ration, arma::mat wgt, arma::cube suitability, double phiMin, double otherFood);
+RcppExport SEXP _LeMANS_calc_M2_c(SEXP nSizeSEXP, SEXP nSpeciesSEXP, SEXP NSEXP, SEXP scLinfSEXP, SEXP rationSEXP, SEXP wgtSEXP, SEXP suitabilitySEXP, SEXP phiMinSEXP, SEXP otherFoodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,13 +21,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::cube >::type suitability(suitabilitySEXP);
     Rcpp::traits::input_parameter< double >::type phiMin(phiMinSEXP);
     Rcpp::traits::input_parameter< double >::type otherFood(otherFoodSEXP);
-    rcpp_result_gen = Rcpp::wrap(calc_M2(nSize, nSpecies, N, scLinf, ration, wgt, suitability, phiMin, otherFood));
+    rcpp_result_gen = Rcpp::wrap(calc_M2_c(nSize, nSpecies, N, scLinf, ration, wgt, suitability, phiMin, otherFood));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_LeMANS_calc_M2", (DL_FUNC) &_LeMANS_calc_M2, 9},
+    {"_LeMANS_calc_M2_c", (DL_FUNC) &_LeMANS_calc_M2_c, 9},
     {NULL, NULL, 0}
 };
 
