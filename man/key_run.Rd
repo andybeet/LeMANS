@@ -6,11 +6,16 @@
 \usage{
 key_run(Ffull, nYrs)
 }
+\arguments{
+\item{Ffull}{Fishing mortaliy rate for a fully recruited fish}
+
+\item{nYrs}{Number of years to simulate.}
+}
 \description{
 Runs the LeMANS model. currently loads Rochet et al data when package loads.
 The code was adapted directly from MATLAB code used for the
 Hall et al and Rochet et al papers.
 }
 \seealso{
-\code{\link{species}}, \code{\link{foodweb}}, \code{\link{parameterValues}}, \code{\link{initialValues}}
+\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
 }

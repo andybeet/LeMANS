@@ -4,10 +4,11 @@
 #'The code was adapted directly from MATLAB code used for the
 #'Hall et al and Rochet et al papers.
 #'
+#'@param Ffull Fishing mortaliy rate for a fully recruited fish
+#'@param nYrs Number of years to simulate.
 #'
 #'
-#'
-#'@seealso \code{\link{species}}, \code{\link{foodweb}}, \code{\link{parameterValues}}, \code{\link{initialValues}}
+#'@seealso \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
 #'@export
 
 
@@ -16,6 +17,10 @@
 # initialValues, parameterValues, species, foodweb
 key_run <- function(Ffull,nYrs) {
   start <- Sys.time()
+  parameterValues <- data_parameterValues
+  initialValues <- data_initialValues
+  species <- data_species
+  foodweb <- data_foodweb
   # initial set up
   nSizeClass <- dim(initialValues)[2]
   nSpecies <- dim(initialValues)[1]
@@ -49,8 +54,7 @@ key_run <- function(Ffull,nYrs) {
   uppScBin <- lowScBin + maxFishSize/nSizeClass
   midScBin <- lowScBin + (uppScBin-lowScBin)/2
   ##################################################################
-  # transpose foodweb. predator on rows, prey columns
-  FW <- t(foodweb)*predationFlag
+  FW <- foodweb*predationFlag
   initN <- t(initialValues)
   initN <- initN*convertCatch
   ##################################################################
@@ -71,32 +75,29 @@ key_run <- function(Ffull,nYrs) {
 
   ##################################################################
   # calculate the proportion leaving each size class per time step, and time step
-  phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin)
+  phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin,parameterValues)
 
   ##################################################################
   # calculate the ration, weight, efficiency and largest size class
-  ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin)
+  ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin,parameterValues)
   ##################################################################
   # calculate maturity
-  mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat,ration$scLinf)
+  mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat,ration$scLinf,parameterValues)
   ##################################################################
   # calculate M1 (residual natural mortality)
-  M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin)
-  ##################################################################
+  M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin,parameterValues)
+  ################################################################
   # calculated the size preference and the suitabilities
   M2PrefSuit <- calc_sizepref_suitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
-  #M2PrefSuit <- calc_sizePref_suitabilityOld(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
   ##################################################################
   # calculates the predation mortalities
   #M2calcs <- calc_M2_r(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
   M2calcs <- calc_M2_c(nSizeClass,nSpecies,initN,ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,otherFood)
 
-
-  #eturn(list(M2=M2PrefSuit,mBin=midScBin,ration=ration))
   ##################################################################
   # calculates the fishing mortalities
   # this will be extended to deal with more than one fleet
-  eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin)
+  eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,Falpha,FL50,ration$scLinf,scLinfMat,phi$phiMin,parameterValues)
   ##################################################################
   # calculate Recruits and SSB
   recruits <- calc_recruits(initN,mature,ration$wgt,recruitAlphas,recruitBetas)
