@@ -8,7 +8,7 @@ Details of the model can be found in the follwing publications:
 
 Originally coded in MATLAB
 
-## Usage
+## Usage - STILL IN DEVELOPMENT
 
 ### Installation
 
