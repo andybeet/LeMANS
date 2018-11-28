@@ -22,5 +22,8 @@ The code was developed with a similar structure to the MATLAB code. Supporting d
 
 * data_foodweb  - Predator-prey matrix (binary). Predator (column), prey (row)
 * data_initialValues  - number of individuals per tow for each species/sizeclass combination
-* data_parameterValues
-* data_species
+* data_parameterValues - carrying capacity (k), Maximum length (Linf) + for each species
+* data_species - lists common name, scientific name, and guild each species is a member of.
+
+To run the model with parameter values described in the Rochet et al paper simply type:
+
