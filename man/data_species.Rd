@@ -3,7 +3,7 @@
 \docType{data}
 \name{data_species}
 \alias{data_species}
-\title{species descriptions}
+\title{Species descriptions}
 \format{A data frame of size 22 x 4. Species in rows. The columns are defined as:
 \describe{
     \item{speciesNumber}{Ordered sequence of species numbers}
@@ -49,6 +49,6 @@ Sandlance
 }
 
 \seealso{
-\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}, \code{\link{data_modelSetup}}
 }
 \keyword{datasets}

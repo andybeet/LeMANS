@@ -21,6 +21,6 @@ data_initialValues
 starting conditions for all species in each of the species size classes
 }
 \seealso{
-\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}, \code{\link{data_modelSetup}}
 }
 \keyword{datasets}

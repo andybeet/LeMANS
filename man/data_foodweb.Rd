@@ -19,6 +19,6 @@ data_foodweb
 A 22 species foodweb. Entries are 0 or 1 indicating if species in column eats species in row
 }
 \seealso{
-\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}, \code{\link{data_modelSetup}}
 }
 \keyword{datasets}

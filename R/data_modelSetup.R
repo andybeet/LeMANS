@@ -1,0 +1,30 @@
+#' List of species independent parameters
+#'
+#' A list of other parameter values required for the model to run
+#'
+#' @format A list of species independent parameters:
+#' \describe{
+#'
+#'      \item{otherFood}{Amount of other food available not accounted for in the model (g)}
+#'      \item{predationFlag}{A flag denoting if predation is on 1 or off 0 in model}
+#'      \item{Falpha}{Steepness of selectivity curve}
+#'      \item{FL50}{Length at 50\% selectivity}
+#'      \item{alphaInt}{Scaling for Ricker alpha wrt L_inf}
+#'      \item{alphaExp}{Scaling for Ricker alpha wrt L_inf}
+#'      \item{betaInt}{Scaling for Ricker beta wrt Smax}
+#'      \item{betaExp}{Scaling for Ricker beta wrt Smax}
+#'      \item{SmaxScale}{Catchability scaling for Smax estimate from survery}
+#'      \item{forageFishAlpha}{Trial for forage fish}
+#'      \item{alphaM1}{beta pdf parameter to model M1}
+#'      \item{betaM1}{beta pdf parameter to model M1}
+#'      \item{cM1}{scaling of pdf to model M1}
+#'      \item{spMu}{Mean of size preference function }
+#'      \item{spSigma}{Standard deviation of size preference function}
+#'
+#' }
+#'
+#'@seealso \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}, \code{\link{data_modelSetup}}
+#'
+#'@source Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63: 1344-1359
+#'@source Rochet et al. (2011). Does selective fishing conserve community biodiversiy? Predictions from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68: 469-486
+"data_modelSetup"

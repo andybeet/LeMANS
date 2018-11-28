@@ -28,6 +28,6 @@ data_parameterValues
 Species specific parameter values
 }
 \seealso{
-\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}, \code{\link{data_modelSetup}}
 }
 \keyword{datasets}
