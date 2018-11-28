@@ -8,7 +8,6 @@
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
-
 # knitr and R markdown default cache directories
 /*_cache/
 /cache/
@@ -17,15 +16,11 @@ vignettes/*.pdf
 *.knit.md
 # Output files from R CMD build
 /*.tar.gz
-
 # Output files from R CMD check
 /*.Rcheck/
-
-
 # folders
 other
-
 # test files
 *test*.R
 hello.*
-
+inst/doc
