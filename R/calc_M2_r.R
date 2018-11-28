@@ -1,7 +1,6 @@
 #'calculate predation Mortality
 #'
-#' Calculates the predation mortality for each species in each size
-#' class
+#' Calculates the predation mortality for each species in each size class
 #'
 #'
 #'@param nSize Number of size class intervals species can grow through
@@ -9,7 +8,7 @@
 #'@param N an nSize x nSpecies matrix of abundance (number of individuals)
 #'@param ration a list of ration, weight by class, The size class at which each species reaches L_inf (maximum length). see \code{\link{calc_sizepref_suitability}}.
 #'@param suitability a 3D array of predator prey suitabilities. See \code{\link{calc_ration}}
-#'@param phiMin Model timestep (years).
+#'@param phiMin Model timestep (years). See \code{\link{calc_phi}}
 #'@param otherfood The amount of other food available unaccounted for in the model (grams)
 #'
 #'@return A matrix is returned

@@ -18,7 +18,7 @@ calc_sizepref_suitability(nSize, nSpecies, mBound, spMu, spSigma, wgt,
 
 \item{spSigma}{Standard deviation of the log normal distribution}
 
-\item{wgt}{Weight of species at the mid point of each size class (Units: grams)}
+\item{wgt}{Weight of species at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}}
 
 \item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
 
@@ -27,8 +27,9 @@ calc_sizepref_suitability(nSize, nSpecies, mBound, spMu, spSigma, wgt,
 \value{
 A list is returned
 
-   \code{sizePref}
-   \code{suitability}
+   \code{sizePref} 3D array of predator size preference of prey size.
+
+   \code{suitability} 3D array of predator size preference of prey size. (sizePref*Food Web)
 }
 \description{
 Calculates the lognormal probability functions for prey preferences, based on the predator/prey size (wgt) ratio.

@@ -15,6 +15,7 @@
 #'
 #'    \code{probGrowOut}    - nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
 #'    Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf.
+#'
 #'    \code{phiMin} Model timestep (years). (shortest time it takes any species to grow into nex size class. All species are normalized by this quantity)
 #'
 #'@section References:

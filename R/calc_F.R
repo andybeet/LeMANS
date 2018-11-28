@@ -13,7 +13,7 @@
 #'@param FL50 The length at which 50 \% selection by the fishery occurs.
 #'@param scLinf The size class at which each species reaches L_inf (maximum length)
 #'@param scLinfMat Binary matrix indicating which size classes each species occupies
-#'@param phiMin Model timestep (years)
+#'@param phiMin Model timestep (years). See  \code{\link{calc_phi}}
 #'@param parameterValues data. See \code{\link{data_parameterValues}}
 #'
 #'@return A matrix is returned

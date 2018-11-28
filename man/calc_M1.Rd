@@ -24,7 +24,7 @@ calc_M1(nSize, nSpecies, lBound, mBound, alphaM1, betaM1, cM1, scLinfMat,
 
 \item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
 
-\item{phiMin}{Model timestep (years)}
+\item{phiMin}{Model timestep (years). See \code{\link{calc_phi}}}
 
 \item{parameterValues}{data. See \code{\link{data_parameterValues}}}
 }

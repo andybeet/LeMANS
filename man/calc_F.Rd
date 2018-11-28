@@ -26,7 +26,7 @@ calc_F(nSize, nSpecies, mBound, lBound, Ffull, Falpha, FL50, scLinf,
 
 \item{scLinfMat}{Binary matrix indicating which size classes each species occupies}
 
-\item{phiMin}{Model timestep (years)}
+\item{phiMin}{Model timestep (years). See  \code{\link{calc_phi}}}
 
 \item{parameterValues}{data. See \code{\link{data_parameterValues}}}
 }

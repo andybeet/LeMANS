@@ -12,7 +12,7 @@
 #'@param betaM1 Shape parameter beta of the beta distribution
 #'@param cM1 scales the pdf ??????
 #'@param scLinf The size class at which each species reaches L_inf (maximum length)
-#'@param phiMin Model timestep (years)
+#'@param phiMin Model timestep (years). See \code{\link{calc_phi}}
 #'@param parameterValues data. See \code{\link{data_parameterValues}}
 
 #'

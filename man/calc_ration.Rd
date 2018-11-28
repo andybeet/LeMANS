@@ -16,20 +16,23 @@ calc_ration(nSize, nSpecies, uBound, lBound, midBound, phiMin,
 
 \item{lBound}{lower bound of each size class interval}
 
-\item{phiMin}{Model timestep (years)}
+\item{phiMin}{Model timestep (years). See \code{\link{calc_phi}}}
 
 \item{mBound}{mid point of each size class interval}
 }
 \value{
 A list is returned
 
-   \code{ration}
-   \code{wgt}
-   \code{gEff}
-   \code{scLinf}
+   \code{ration} nSize x nSpecies matrix. (growth in time interval)/growth efficiency
+
+   \code{wgt} Weight of average sized fish (each size class). Uses length weight relationship. See \code{data_parameterValues}
+
+   \code{gEff} nSize x nSpecies matrix. Growth Efficiency of species j in size class i
+
+   \code{scLinf} The size class at which each species reaches L_inf (maximum length)
 }
 \description{
-Calculates the ration, weight, and growth efficiency for a species in a size class
+Calculates the ration, weight, and growth efficiency for a species in a size class. Ration is defined as growth increment / growth efficiency
 }
 \section{References}{
 

@@ -8,13 +8,16 @@
 #'@param uBound upper bound of each size class interval
 #'@param lBound lower bound of each size class interval
 #'@param mBound mid point of each size class interval
-#'@param phiMin Model timestep (years)
+#'@param phiMin Model timestep (years). See \code{\link{calc_phi}}
 #'
 #'@return A list is returned
 #'
 #'    \code{ration} nSize x nSpecies matrix. (growth in time interval)/growth efficiency
+#'
 #'    \code{wgt} Weight of average sized fish (each size class). Uses length weight relationship. See \code{data_parameterValues}
+#'
 #'    \code{gEff} nSize x nSpecies matrix. Growth Efficiency of species j in size class i
+#'
 #'    \code{scLinf} The size class at which each species reaches L_inf (maximum length)
 #'
 #'
