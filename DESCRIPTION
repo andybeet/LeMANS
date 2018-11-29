@@ -4,9 +4,7 @@ Title: length-based multispecies analysis by numerical simulation (LeMANS)
 Version: 0.1.0
 Author: person("Andy","Beet",email="andrew.beet@noaa.gov",role=c("aut","cre"))
 Maintainer: Andy Beet <andrew.beet@noaa.gov>
-Description: An implementation of the LeMANS model as described in the Hall et al (2006) and Roche et al (2011) publications.
-    Additional modification have been implemented.
-    Muliple fleets, allowing for stockasticity, differnt forms for recruitment
+Description: An implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) publications.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

@@ -14,10 +14,45 @@ knitr::opts_chunk$set(
 )
 ```
 
-##############################################################################
-##############################################################################
-##############################################################################
-# DOCUMENTATION NOT COMPLETE 
-##############################################################################
-##############################################################################
-##############################################################################
+
+The LeMANS package is an implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) publications. The data provided (bundeled with the package -lazily loaded) reflects the Georges Bank (USA) data described in the Rochet et al. paper.
+
+* `data_modelSetup`
+* `data_parameterValues`
+* `data_initialValues`
+* `data_foodweb`
+* `data_species`
+
+
+The contents of these can be viewed simply by typing in the names in the console. To view the description of a data object use help. For example `?data_parameterValues`
+
+## Usage
+
+To run the model right out of the box:
+
+    results <- key_run(Ffull=0.4, nYears=50, data_modelSetup, data_parameterValues, data_initialValues, data_foodweb, data_species)
+
+`results` is a list of several output variables (catch, recruits, spawning stock biomass, etc). Available [plotting](#plotting) routines help visualize the output
+
+Type `?key_run` for more help 
+
+## Intermediate functions
+
+Several functions are invoked to set up the model. These functions can be changed by the user to suit their needs.
+
+* `calc_M1`
+* `calc_M2`
+* `calc_M2_c`
+* `calc_maturity`
+* `calc_phi`
+* `calc_population_growth`
+* `calc_ration`
+* `calc_recruits`
+* `calc_sizePref_suitability`
+* `calc_F`
+
+Help is available for all functions
+
+## Plotting {#plotting}
+
+Visualization of output is critical. Included are several functions to aid in interpreting the results.
