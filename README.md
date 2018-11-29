@@ -8,7 +8,7 @@ Details of the model can be found in the follwing publications:
 
 Originally coded in MATLAB
 
-# Features
+## Features
 
 * Each component of the model (M1, M2, F, suitability, size preference etc) has been modularized such that a users code block can be substitued.
 
