@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_ration.R
 \name{calc_ration}
 \alias{calc_ration}
-\title{calculate species ration, growth efficiency, and size class weight}
+\title{Calculate species ration, growth efficiency, and size class weight}
 \usage{
 calc_ration(nSize, nSpecies, uBound, lBound, midBound, phiMin,
   parameterValues)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_sizepref_suitability.R
 \name{calc_sizepref_suitability}
 \alias{calc_sizepref_suitability}
-\title{calculate size preference and suitability}
+\title{Calculates size preference and suitability}
 \usage{
 calc_sizepref_suitability(nSize, nSpecies, mBound, spMu, spSigma, wgt,
   scLinf, FW)

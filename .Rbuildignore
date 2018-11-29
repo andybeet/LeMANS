@@ -3,7 +3,3 @@
 ^other$
 ^data-raw$
 
-^test\.R$
-^test2\.R$
-^plot$
-

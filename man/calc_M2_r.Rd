@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_M2_r.R
 \name{calc_M2_r}
 \alias{calc_M2_r}
-\title{calculate predation Mortality}
+\title{Calculate predation Mortality, M2, in R}
 \usage{
 calc_M2_r(nSize, nSpecies, N, ration, suitability, phiMin, otherFood)
 }

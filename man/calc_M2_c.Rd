@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{calc_M2_c}
 \alias{calc_M2_c}
-\title{calculates M2 using c++}
+\title{Calculates predation mortality, M2, in C++}
 \usage{
 calc_M2_c(nSize, nSpecies, N, scLinf, ration, wgt, suitability, phiMin,
   otherFood)

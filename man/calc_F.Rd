@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_F.R
 \name{calc_F}
 \alias{calc_F}
-\title{calculate fishing Mortality}
+\title{Calculate fishing Mortality}
 \usage{
 calc_F(nSize, nSpecies, mBound, lBound, Ffull, Falpha, FL50, scLinf,
   scLinfMat, phiMin, parameterValues)
