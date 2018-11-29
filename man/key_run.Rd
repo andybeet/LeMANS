@@ -4,12 +4,23 @@
 \alias{key_run}
 \title{Key_Run (Length-based Multispecies Analysis by numerical Simulation)}
 \usage{
-key_run(Ffull, nYrs)
+key_run(Ffull, nYrs, modelSetupData, parameterValues, initialValues,
+  foodweb, species)
 }
 \arguments{
 \item{Ffull}{Fishing mortaliy rate for a fully recruited fish}
 
 \item{nYrs}{Number of years to simulate.}
+
+\item{modelSetupData}{list of parameters required for model (See \code{\link{data_modelSetup}})}
+
+\item{parameterValues}{matrix of species specific parameters (See \code{\link{data_parameterValues}})}
+
+\item{initialValues}{matrix of initial abundance estimates (See \code{\link{data_initialValues}})}
+
+\item{foodweb}{predator prey food web (See \code{\link{data_foodweb}})}
+
+\item{species}{matrix of species names and guild membership (See \code{\link{data_species}})}
 }
 \description{
 Runs the LeMANS model. currently loads Rochet et al data when package loads.

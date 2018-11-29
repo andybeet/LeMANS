@@ -1,4 +1,4 @@
-#'calculate species ration, growth efficiency, and size class weight
+#'Calculate species ration, growth efficiency, and size class weight
 #'
 #' Calculates the ration, weight, and growth efficiency for a species in a size class. Ration is defined as growth increment / growth efficiency
 #'

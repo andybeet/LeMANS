@@ -1,6 +1,6 @@
 // [[Rccp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
-//' calculates M2 using c++
+//' Calculates predation mortality, M2, in C++
 //'
 //' Calculates the predation mortality for each species in each size class
 //'

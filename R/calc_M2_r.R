@@ -1,4 +1,4 @@
-#'calculate predation Mortality
+#'Calculate predation Mortality, M2, in R
 #'
 #' Calculates the predation mortality for each species in each size class
 #'

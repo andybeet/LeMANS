@@ -1,4 +1,4 @@
-#'calculate size preference and suitability
+#'Calculates size preference and suitability
 #'
 #'Calculates the lognormal probability functions for prey preferences, based on the predator/prey size (wgt) ratio.
 #'Returns a 3D matrix with the (prey/predator) body size ratio for predator of size i, species j, and prey size k species l.

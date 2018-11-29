@@ -1,4 +1,4 @@
-#'calculate fishing Mortality
+#'Calculate fishing Mortality
 #'
 #' Calculates the fishing mortality for each species in each size
 #' class using a logistic selectivity curve.
