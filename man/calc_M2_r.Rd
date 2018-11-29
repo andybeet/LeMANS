@@ -17,7 +17,7 @@ calc_M2_r(nSize, nSpecies, N, ration, suitability, phiMin, otherFood)
 
 \item{suitability}{a 3D array of predator prey suitabilities. See \code{\link{calc_ration}}}
 
-\item{phiMin}{Model timestep (years).}
+\item{phiMin}{Model timestep (years). See \code{\link{calc_phi}}}
 
 \item{otherfood}{The amount of other food available unaccounted for in the model (grams)}
 }
@@ -28,8 +28,7 @@ A matrix is returned
    Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.
 }
 \description{
-Calculates the predation mortality for each species in each size
-class
+Calculates the predation mortality for each species in each size class
 }
 \section{References}{
 
