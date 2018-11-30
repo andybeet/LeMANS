@@ -22,11 +22,21 @@ key_run(Ffull, nYrs, modelSetupData, parameterValues, initialValues,
 
 \item{species}{matrix of species names and guild membership (See \code{\link{data_species}})}
 }
+\value{
+A list containing:
+
+   \code{N} 3D array of abundance (numbers of animals). nsizeClass x nSpecies x nTimeSteps
+   \code{M1} Matrix of M1 mortality ("natural"). nsizeClass x nSpecies
+   \code{M2} 3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps
+   \code{catch} 3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps
+   \code{SSB} Matrix of spawning stock biomass (SSB). nSpecies x nYears
+   \code{recruits} Matrix of recruits (numbers of animals). nSpecies x nYears
+}
 \description{
 Runs the LeMANS model. currently loads Rochet et al data when package loads.
 The code was adapted directly from MATLAB code used for the
 Hall et al and Rochet et al papers.
 }
 \seealso{
-\code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+\code{\link{plot_key_run}} \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
 }

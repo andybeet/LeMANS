@@ -1,53 +1,67 @@
 #' Plots output from the key_run script
 #'
+#' Plots catch, N, M2, SSB, recruits etc output from the model
+#'
 #'@param dataSet The data set to be plotted
-#'@param title The title of the figure
+#'@param ylabel The yaxis label for the figure
+#'@param is.aggregated A logical value. Determins if aggregation is required over sizeClass
+#'@param speciesNames A data frame in the format \code{\link{data_species}}
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom ggplot2 "aes" "geom_line" "facet_wrap" "ylab"
 #'
 #' @export
 
-plot_key_run <- function(dataSet,title,is.aggregated=T) {
+plot_key_run <- function(dataSet,ylabel,is.aggregated=T,speciesNames) {
 
   dimOfData <- dim(dataSet)
-  if (length(dimOfData) > 2) {
-    # transform data into a 2 array for use with ggplot
+  if (length(dimOfData) > 2) { # output with size structure, by species over time (catch, N, M2)
     df <- reshape::melt(dataSet)
-    names(df) <- c("sizeClass","species","time","data")
+    # transform data into a 2 array for use with ggplot
+    names(df) <- c("sizeClass","speciesNumber","time","dataF")
+    df <- dplyr::inner_join(df,speciesNames,"speciesNumber")
+    df <- dplyr::select(df,sizeClass,commonName,time,dataF)
+    df$commonName <- factor(df$commonName, levels = unique(df$commonName))
 
-    newdf <- dplyr::group_by(df,species,time) %>% dplyr::summarize(aggData = sum(data,na.rm=T))
+    if (is.aggregated) {
+      # sum over sizeclass to get species totals for each time step
+      newdf <- dplyr::group_by(df,commonName,time) %>% dplyr::summarize(aggData = sum(dataF,na.rm=T))
 
-    p <- ggplot2::ggplot(data=newdf) +
-      geom_line(mapping =  aes(x = time, y = aggData)) + ylab("Catch (units?)") +
-      facet_wrap( ~ species)
-    print(p)
+      p <- ggplot2::ggplot(data=newdf) +
+        geom_line(mapping =  aes(x = time, y = aggData)) + ylab(ylabel) +
+        facet_wrap( ~ commonName, scales = "free")
+      print(p)
+    } else { # plot sizeclasses on same figure
+      p <- ggplot2::ggplot(data=df) +
+        geom_line(mapping =  aes(x = time, y = dataF, group = sizeClass)) + ylab(ylabel) +
+        facet_wrap( ~ commonName, scales = "free")
+      print(p)
 
+    }
+  } else if (length(dimOfData) == 2) { # output by species over time (SSB & recruits) or M1)
+    if (dimOfData[1] == dim(speciesNames)[1]) { # nSpeces x  nYears
+      df <- reshape::melt(dataSet)
+      names(df) <- c("speciesNumber","year","dataF")
+      df <- dplyr::inner_join(df,speciesNames,"speciesNumber")
+      df <- dplyr::select(df,commonName,year,dataF)
+      df$commonName <- factor(df$commonName, levels = unique(df$commonName))
+
+
+      p <- ggplot2::ggplot(data=df) +
+        geom_line(mapping =  aes(x = year, y = dataF)) + ylab(ylabel) +
+        facet_wrap( ~ commonName, scales = "free")
+      print(p)
+    } else { # M1
+
+    }
+
+
+
+  } else {
+    stop("Not coded for structures other than 2D and 3D arrays")
   }
 
 
-
-#return(newdf)
-
-  if (length(dimOfData) == 3) {
-    nSizes <- dim(dataSet)[1]
-    nSpecies <- dim(dataSet)[2]
-    nTimeSteps <- dim(dataSet)[3]
-  }
-  if (is.aggregated) { # aggregate over size class
-    aggData2 <- apply(dataSet,c(2,3),sum,na.rm=T)
-  }
-
-  par(mfrow=c(4,6))
-  par(mar=c(2,2,3,2)+0.1)
-  par(oma=c(2,4,4,0))
-
-  for (isp in 1:nSpecies) {
-    plot(aggData2[isp,],main = title)
-  }
-
-  # plot(catchOverSize, col = "darkred", xlab = "Time", nc = 6,
-  #      panel = function(x) { grid(col = "lightgray");lines(x) })
 
 
 }

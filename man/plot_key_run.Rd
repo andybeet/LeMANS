@@ -4,13 +4,17 @@
 \alias{plot_key_run}
 \title{Plots output from the key_run script}
 \usage{
-plot_key_run(dataSet, title, is.aggregated = T)
+plot_key_run(dataSet, ylabel, is.aggregated = T, speciesNames)
 }
 \arguments{
 \item{dataSet}{The data set to be plotted}
 
-\item{title}{The title of the figure}
+\item{ylabel}{The yaxis label for the figure}
+
+\item{is.aggregated}{A logical value. Determins if aggregation is required over sizeClass}
+
+\item{speciesNames}{A data frame in the format \code{\link{data_species}}}
 }
 \description{
-Plots output from the key_run script
+Plots catch, N, M2, SSB, recruits etc output from the model
 }

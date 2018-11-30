@@ -12,7 +12,16 @@
 #'@param foodweb predator prey food web (See \code{\link{data_foodweb}})
 #'@param species matrix of species names and guild membership (See \code{\link{data_species}})
 #'
-#'@seealso \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+#'@return A list containing:
+#'
+#'    \code{N} 3D array of abundance (numbers of animals). nsizeClass x nSpecies x nTimeSteps
+#'    \code{M1} Matrix of M1 mortality ("natural"). nsizeClass x nSpecies
+#'    \code{M2} 3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps
+#'    \code{catch} 3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps
+#'    \code{SSB} Matrix of spawning stock biomass (SSB). nSpecies x nYears
+#'    \code{recruits} Matrix of recruits (numbers of animals). nSpecies x nYears
+#'
+#'@seealso \code{\link{plot_key_run}} \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
 #'@export
 
 
@@ -148,6 +157,6 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
 
 
   print(Sys.time()-start)
-  return(list(N=N,M2=M2,catch=catch,SSB=SSB,Recruits=R))
+  return(list(N=N,M1=M1,M2=M2,catch=catch,SSB=SSB,recruits=R))
 
 }
