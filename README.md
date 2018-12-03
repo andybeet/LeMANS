@@ -38,10 +38,10 @@ The code was developed with a similar structure to the MATLAB code. Supporting d
 
 To run the model with parameter values described in the Rochet et al paper simply type:
 
-results <- key_run(Ffull=0.4, nYears=50, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)
+results <- key_run(Ffull=0.4, nYrs=50, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)
 
 To plot the catch output aggregated over sizeClass:
 
-plot_key_run(results$catch, ylabel = "catch (millions individuals)",is.aggregated=T,rochet_GB_species)
+plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)",is.aggregated=T,rochet_GB_species,scale="free")
 
 
