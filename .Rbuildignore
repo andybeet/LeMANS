@@ -2,4 +2,3 @@
 ^\.Rproj\.user$
 ^other$
 ^data-raw$
-^test*.R$

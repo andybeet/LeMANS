@@ -5,7 +5,7 @@
 \title{Plots output from the key_run script}
 \usage{
 plot_key_run(dataSet, ylabel = "ylabel", is.aggregated = T,
-  speciesNames)
+  speciesNames, scales = "fixed")
 }
 \arguments{
 \item{dataSet}{The data set to be plotted}
@@ -15,7 +15,11 @@ plot_key_run(dataSet, ylabel = "ylabel", is.aggregated = T,
 \item{is.aggregated}{A logical value. Determines if aggregation is required over sizeClass}
 
 \item{speciesNames}{A data frame in the format of \code{\link{rochet_GB_species}}}
+
+\item{scales}{Text indicating is facet plots are displayed using same yaxis range ("fixed") or not ("free")}
 }
 \description{
-Plots catch, N, M1, M2, SSB, recruits etc output from the model
+Plots catch, N, M1, M2, SSB, recruits output from the model.
+This is a rudimentary tool used for troubleshooting the model.
+The user is expected to develop their own set of plotting tools for publication purposes
 }

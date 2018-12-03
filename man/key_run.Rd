@@ -31,6 +31,8 @@ A list containing:
 
    \item{M2}{3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps}
 
+   \item{F}{3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps}
+
    \item{catch}{3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps}
 
    \item{SSB}{Matrix of spawning stock biomass (SSB). nSpecies x nYears}
@@ -42,10 +44,19 @@ Runs the LeMANS model. currently loads Rochet et al data when package loads.
 The code was adapted directly from MATLAB code used for the
 Hall et al and Rochet et al papers.
 }
-\section{Using other data sets}{
+\section{Using the Rochet et al data set}{
 
-The number of size classes and the width of the size class interval should be decided upon a priori. This decision should be based on the maximum L_inf among all species.
-The \code{rochet_GB_initialValues} should be set up to represent the number of size classes.
+The number of size classes and the width of the size class was decided upon a priori.
+This decision was based on the maximum L_inf among all species. max(Linf) = 148 cm
+The \code{rochet_GB_initialValues} should be set up to represent the number of size classes and width.
+
+The unit of output for Rochet et al data:
+
+   catch, N:  number of individuals
+
+   M1, M2, eF: rates
+
+   recruits and SSB: were scaled to common recruit and spawning stock size units (individuals × 10^6 and tonnes × 10^3, respectively)
 }
 
 \seealso{

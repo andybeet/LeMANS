@@ -8,31 +8,38 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(collapse = TRUE,   comment = "#>" ,fig.width = 8, fig.height = 8,fig.align="center")
+library(LeMANS)
 ```
 
 
-The LeMANS package is an implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) publications. The data provided (bundeled with the package -lazily loaded) reflects the Georges Bank (USA) data described in the Rochet et al. paper.
+The LeMANS package is an implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) [publications](#pubs). The data provided (bundled with the package - lazily loaded) reflects the Georges Bank (USA) data described in the Rochet et al. paper.
 
-* `data_modelSetup`
-* `data_parameterValues`
-* `data_initialValues`
-* `data_foodweb`
-* `data_species`
+* `rochet_GB_modelSetup`
+* `rochet_GB_parameterValues`
+* `rochet_GB_initialValues`
+* `rochet_GB_foodweb`
+* `rochet_GB_species`
 
 
-The contents of these can be viewed simply by typing in the names in the console. To view the description of a data object use help. For example `?data_parameterValues`
+The contents of these can be viewed simply by typing in the names in the console. To view the description of a data object use help. For example `?rochet_GB_parameterValues`.
 
 ## Usage
 
 To run the model right out of the box:
+```{r run1, echo=TRUE}
+    results <- key_run(Ffull=0.4, nYrs=50, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)
 
-    results <- key_run(Ffull=0.4, nYears=50, data_modelSetup, data_parameterValues, data_initialValues, data_foodweb, data_species)
+```
 
-`results` is a list of several output variables (catch, recruits, spawning stock biomass, etc). Available [plotting](#plotting) routines help visualize the output
+
+`results` is a list of several output variables (catch, recruits, M1, M2, F, spawning stock biomass, and N).
+
+```{r run2, echo=TRUE}
+    str(results)
+```
+
+[Plotting](#plotting) routines help visualize these output variables
 
 Type `?key_run` for more help 
 
@@ -51,8 +58,37 @@ Several functions are invoked to set up the model. These functions can be change
 * `calc_sizePref_suitability`
 * `calc_F`
 
-Help is available for all functions
+Help is available for all functions or feel free to write your own to replace any of these.
 
 ## Plotting {#plotting}
 
-Visualization of output is critical. Included are several functions to aid in interpreting the results.
+Visualization of output is critical. A basic plotting tool is provided to view output. The user is encouraged to write their own plotting routines. To produce a plot of catch by species for each size class with all of the species yaxes scaled to their output:
+
+```{r plot_c, echo = TRUE}
+    plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)", is.aggregated=F, rochet_GB_species, scales="free")
+
+```
+
+
+To produce a plot of total abundance aggregated over each size class with species yaxes fixed across all species:
+```{r plot_n, echo = TRUE}
+    plot_key_run(results$N/1E6, ylabel = "Abundance (millions individuals)", is.aggregated=T, rochet_GB_species, scales="free")
+
+```
+
+
+To produce a plot of M2 predation for each size class with species yaxes fixed across all species:
+```{r plot_m2, echo = TRUE}
+    plot_key_run(results$M2, ylabel = "Predation mortality", is.aggregated=F, rochet_GB_species, scales="fixed")
+
+```
+
+
+
+## Publications {#pubs}
+
+* Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
+
+ * Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486
+
+

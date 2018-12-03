@@ -8,7 +8,7 @@
 #'@param ylabel The yaxis label for the figure
 #'@param is.aggregated A logical value. Determines if aggregation is required over sizeClass
 #'@param speciesNames A data frame in the format of \code{\link{rochet_GB_species}}
-#'
+#'@param scales Text indicating is facet plots are displayed using same yaxis range ("fixed") or not ("free")
 #'
 #'
 #' @importFrom magrittr "%>%"
@@ -16,7 +16,7 @@
 #'
 #' @export
 
-plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames) {
+plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames,scales="fixed") {
 
   dimOfData <- dim(dataSet)
 
@@ -34,13 +34,13 @@ plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames) {
 
       p <- ggplot2::ggplot(data=newdf) +
         geom_line(mapping =  aes(x = time, y = aggData)) + ylab(ylabel) +
-        facet_wrap( ~ commonName, scales = "free")
+        facet_wrap( ~ commonName, scales = scales)
       print(p)
     } else { # plot sizeclasses on same figure
       options(warn =-1)
       p <- ggplot2::ggplot(data=df) +
         geom_line(mapping =  aes(x = time, y = dataF, group = sizeClass)) + ylab(ylabel) +
-        facet_wrap( ~ commonName, scales = "free")
+        facet_wrap( ~ commonName, scales = scales)
       print(p)
       options(warn=0)
 
@@ -59,7 +59,7 @@ plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames) {
 
       p <- ggplot2::ggplot(data=df) +
         geom_line(mapping =  aes(x = year, y = dataF)) + ylab(ylabel) +
-        facet_wrap( ~ commonName, scales = "free")
+        facet_wrap( ~ commonName, scales = scales)
       print(p)
     } else { # M1
       df <- reshape::melt(dataSet)
@@ -71,7 +71,7 @@ plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames) {
       options(warn=-1)
       p <- ggplot2::ggplot(data=df) +
         geom_line(mapping =  aes(x = sizeClass, y = dataF)) + ylab(ylabel) +
-        facet_wrap( ~ commonName, scales = "free")
+        facet_wrap( ~ commonName, scales = scales)
       print(p)
       options(warn=0)
 

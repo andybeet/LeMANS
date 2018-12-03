@@ -20,15 +20,28 @@
 #'
 #'    \item{M2}{3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps}
 #'
+#'    \item{F}{3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps}
+#'
 #'    \item{catch}{3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps}
 #'
 #'    \item{SSB}{Matrix of spawning stock biomass (SSB). nSpecies x nYears}
 #'
 #'    \item{recruits    }{Matrix of recruits (numbers of animals). nSpecies x nYears}
 #'
-#'@section Using other data sets:
-  #'The number of size classes and the width of the size class interval should be decided upon a priori. This decision should be based on the maximum L_inf among all species.
-  #'The \code{rochet_GB_initialValues} should be set up to represent the number of size classes.
+#'@section Using the Rochet et al data set:
+  #'The number of size classes and the width of the size class was decided upon a priori.
+  #'This decision was based on the maximum L_inf among all species. max(Linf) = 148 cm
+  #'The \code{rochet_GB_initialValues} should be set up to represent the number of size classes and width.
+  #'
+  #'The unit of output for Rochet et al data:
+  #'
+  #'    catch, N:  number of individuals
+  #'
+  #'    M1, M2, eF: rates
+  #'
+  #'    recruits and SSB: were scaled to common recruit and spawning stock size units (individuals × 10^6 and tonnes × 10^3, respectively)
+  #'
+  #'
   #'
 #'@seealso \code{\link{plot_key_run}},  \code{\link{rochet_GB_foodweb}},  \code{\link{rochet_GB_initialValues}},  \code{\link{rochet_GB_parameterValues}},  \code{\link{rochet_GB_species}}
 #'@export
@@ -38,7 +51,6 @@
 # Note: all data fines are read in to memory when package is loaded
 # initialValues, parameterValues, species, foodweb
 key_run <- function(Ffull,nYrs,modelSetup,parameterValues,initialValues,foodweb,species) {
-  start <- Sys.time()
   # initial set up
   nSizeClass <- dim(initialValues)[2]
   nSpecies <- dim(initialValues)[1]
@@ -155,8 +167,6 @@ key_run <- function(Ffull,nYrs,modelSetup,parameterValues,initialValues,foodweb,
   # end of run
   ##################################################################
 
-
-  print(Sys.time()-start)
-  return(list(N=N,M1=M1,M2=M2,catch=catch,SSB=SSB,recruits=R))
+  return(list(N=N,M1=M1,M2=M2,eF=eF,catch=catch,SSB=SSB,recruits=R))
 
 }
