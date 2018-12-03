@@ -18,7 +18,7 @@ Originally coded in MATLAB
 
 * It serves as a framework for extending the model
 
-## Usage - STILL IN DEVELOPMENT
+## Usage
 
 ### Installation
 
