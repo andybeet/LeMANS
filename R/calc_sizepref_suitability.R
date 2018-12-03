@@ -12,13 +12,13 @@
 #'@param spSigma Standard deviation of the log normal distribution
 #'@param wgt Weight of species at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}
 #'@param scLinf The size class at which each species reaches L_inf (maximum length)
-#'@param FW Food web represented as a binary matrix. Predator (columns) and prey (rows). See \code{\link{data_foodweb}}
+#'@param FW Food web represented as a binary matrix. Predator (columns) and prey (rows). See \code{\link{rochet_GB_foodweb}}
 #'
 #'@return A list is returned
 #'
-#'    \code{sizePref} 3D array of predator size preference of prey size.
+#'    \item{sizePref}{3D array of predator size preference of prey size.}
 #'
-#'    \code{suitability} 3D array of predator size preference of prey size. (sizePref*Food Web)
+#'    \item{suitability}{3D array of predator size preference of prey size. (sizePref*Food Web)}
 #'
 #'
 #'@section References:

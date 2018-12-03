@@ -20,9 +20,9 @@ calc_recruits(N, maturity, wgt, recAlpha, recBeta)
 \value{
 A list is returned
 
-   \code{recruits}    Number of recruits (millions). A vector of length nSpecies.
+   \item{recruits}{Number of recruits (millions). A vector of length nSpecies.}
 
-   \code{SSB}  SSB (1000's tonnes). A vector of length nSpecies.
+   \item{SSB}{SSB (1000's tonnes). A vector of length nSpecies.}
 }
 \description{
 The number of recruits are estimated as a function of SSB using the Ricker stock-recruitment relationship.

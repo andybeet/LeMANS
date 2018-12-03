@@ -22,14 +22,14 @@ calc_sizepref_suitability(nSize, nSpecies, mBound, spMu, spSigma, wgt,
 
 \item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
 
-\item{FW}{Food web represented as a binary matrix. Predator (columns) and prey (rows). See \code{\link{data_foodweb}}}
+\item{FW}{Food web represented as a binary matrix. Predator (columns) and prey (rows). See \code{\link{rochet_GB_foodweb}}}
 }
 \value{
 A list is returned
 
-   \code{sizePref} 3D array of predator size preference of prey size.
+   \item{sizePref}{3D array of predator size preference of prey size.}
 
-   \code{suitability} 3D array of predator size preference of prey size. (sizePref*Food Web)
+   \item{suitability}{3D array of predator size preference of prey size. (sizePref*Food Web)}
 }
 \description{
 Calculates the lognormal probability functions for prey preferences, based on the predator/prey size (wgt) ratio.

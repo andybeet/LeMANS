@@ -14,12 +14,12 @@
 #'@param scLinf The size class at which each species reaches L_inf (maximum length)
 #'@param scLinfMat Binary matrix indicating which size classes each species occupies
 #'@param phiMin Model timestep (years). See  \code{\link{calc_phi}}
-#'@param parameterValues data. See \code{\link{data_parameterValues}}
+#'@param parameterValues data. See \code{\link{rochet_GB_parameterValues}}
 #'
 #'@return A matrix is returned
 #'
-#'    \code{F}    - nSize x nSpecies matrix of F (fishing mortality) values where nSpecies = number of species and nSize = number of size classes.
-#'    Note that F_i,j = 0 for size classes i in which species j does not grow (based on von Bertalanfy growth curve)
+#'    \item{F}{nSize x nSpecies matrix of F (fishing mortality) values where nSpecies = number of species and nSize = number of size classes.
+#'    Note that F_i,j = 0 for size classes i in which species j does not grow (based on von Bertalanfy growth curve)}
 #'
 #'
 #'@section References:

@@ -13,8 +13,8 @@
 #'
 #'@return A matrix is returned
 #'
-#'    \code{M2}    - nSize x nSpecies matrix of M2 (predation mortality) values where nSpecies = number of species and nSize = number of size classes.
-#'    Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.
+#'    \item{M2}{nSize x nSpecies matrix of M2 (predation mortality) values where nSpecies = number of species and nSize = number of size classes.
+#'    Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.}
 #'
 #'@seealso \code{\link{calc_sizepref_suitability}}, \code{\link{calc_ration}}
 #'

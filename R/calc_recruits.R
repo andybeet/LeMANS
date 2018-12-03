@@ -12,9 +12,9 @@
 #'
 #'@return A list is returned
 #'
-#'    \code{recruits}    Number of recruits (millions). A vector of length nSpecies.
+#'    \item{recruits}{Number of recruits (millions). A vector of length nSpecies.}
 #'
-#'    \code{SSB}  SSB (1000's tonnes). A vector of length nSpecies.
+#'    \item{SSB}{SSB (1000's tonnes). A vector of length nSpecies.}
 #'
 #'@section References:
 #'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.

@@ -6,29 +6,38 @@
 #'
 #'@param Ffull Fishing mortaliy rate for a fully recruited fish
 #'@param nYrs Number of years to simulate.
-#'@param modelSetupData list of parameters required for model (See \code{\link{data_modelSetup}})
-#'@param parameterValues matrix of species specific parameters (See \code{\link{data_parameterValues}})
-#'@param initialValues matrix of initial abundance estimates (See \code{\link{data_initialValues}})
-#'@param foodweb predator prey food web (See \code{\link{data_foodweb}})
-#'@param species matrix of species names and guild membership (See \code{\link{data_species}})
+#'@param modelSetup list of parameters required for model (See \code{\link{rochet_GB_modelSetup}})
+#'@param parameterValues matrix of species specific parameters (See \code{\link{rochet_GB_parameterValues}})
+#'@param initialValues matrix of initial abundance estimates (See \code{\link{rochet_GB_initialValues}})
+#'@param foodweb predator prey food web (See \code{\link{rochet_GB_foodweb}})
+#'@param species matrix of species names and guild membership (See \code{\link{rochet_GB_species}})
 #'
 #'@return A list containing:
 #'
-#'    \code{N} 3D array of abundance (numbers of animals). nsizeClass x nSpecies x nTimeSteps
-#'    \code{M1} Matrix of M1 mortality ("natural"). nsizeClass x nSpecies
-#'    \code{M2} 3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps
-#'    \code{catch} 3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps
-#'    \code{SSB} Matrix of spawning stock biomass (SSB). nSpecies x nYears
-#'    \code{recruits} Matrix of recruits (numbers of animals). nSpecies x nYears
+#'    \item{N}{3D array of abundance (numbers of animals). nsizeClass x nSpecies x nTimeSteps}
 #'
-#'@seealso \code{\link{plot_key_run}} \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+#'    \item{M1}{Matrix of M1 mortality ("natural"). nsizeClass x nSpecies}
+#'
+#'    \item{M2}{3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps}
+#'
+#'    \item{catch}{3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps}
+#'
+#'    \item{SSB}{Matrix of spawning stock biomass (SSB). nSpecies x nYears}
+#'
+#'    \item{recruits    }{Matrix of recruits (numbers of animals). nSpecies x nYears}
+#'
+#'@section Using other data sets:
+  #'The number of size classes and the width of the size class interval should be decided upon a priori. This decision should be based on the maximum L_inf among all species.
+  #'The \code{rochet_GB_initialValues} should be set up to represent the number of size classes.
+  #'
+#'@seealso \code{\link{plot_key_run}},  \code{\link{rochet_GB_foodweb}},  \code{\link{rochet_GB_initialValues}},  \code{\link{rochet_GB_parameterValues}},  \code{\link{rochet_GB_species}}
 #'@export
 
 
 
 # Note: all data fines are read in to memory when package is loaded
 # initialValues, parameterValues, species, foodweb
-key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,foodweb,species) {
+key_run <- function(Ffull,nYrs,modelSetup,parameterValues,initialValues,foodweb,species) {
   start <- Sys.time()
   # initial set up
   nSizeClass <- dim(initialValues)[2]
@@ -36,19 +45,14 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
   ##################################################################
   # calculate recruitment. Assumes all has a ricker form. All are scaled.
   # see Hall et al paper
-  alphaInt <- modelSetupData$alphaInt # scaling for Ricker alpha wrt L_inf
-  alphaExp <- modelSetupData$alphaExp # scaling for Ricker alpha wrt L_inf
-  betaInt <- modelSetupData$betaInt # scaling for Ricker beta wrt Smax
-  betaExp <- modelSetupData$betaExp # scaling for Ricker beta wrt Smax
-  SmaxScale <-modelSetupData$SmaxScale # Catchability scaling for S.max estimate from survery
+  alphaInt <- modelSetup$alphaInt # scaling for Ricker alpha wrt L_inf
+  alphaExp <- modelSetup$alphaExp # scaling for Ricker alpha wrt L_inf
+  betaInt <- modelSetup$betaInt # scaling for Ricker beta wrt Smax
+  betaExp <- modelSetup$betaExp # scaling for Ricker beta wrt Smax
+  SmaxScale <-modelSetup$SmaxScale # Catchability scaling for S.max estimate from survery
   recruitAlphas <- exp(alphaInt - abs(alphaExp*log(parameterValues$Linf)))
   recruitBetas <- exp(betaInt - betaExp*log(parameterValues$Smax*SmaxScale))
-  recruitAlphas[1] <- modelSetupData$forageFishAlpha # trial for forage fish
-  ##################################################################
-  # M1 -parametes of beta function used to model M1
-  alphaM1 <- modelSetupData$alphaM1
-  betaM1 <- modelSetupData$betaM1
-  cM1 <- modelSetupData$cM1 #scaling of final M1
+  recruitAlphas[1] <- modelSetup$forageFishAlpha # trial for forage fish
   ##################################################################
   # Calculate upper and lower size class bins
   maxFishSize <- max(parameterValues$Linf) * 1.001
@@ -56,13 +60,9 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
   uppScBin <- lowScBin + maxFishSize/nSizeClass
   midScBin <- lowScBin + (uppScBin-lowScBin)/2
   ##################################################################
-  FW <- foodweb*modelSetupData$predationFlag
+  FW <- foodweb*modelSetup$predationFlag
   initN <- t(initialValues)
   initN <- initN
-  ##################################################################
-  # size prefernce function Parameters
-  spMu <- modelSetupData$spMu
-  spSigma <- modelSetupData$spSigma
 
   #logical matrix reperesnteing size class bins applicable for each species
   scLinfMat <- sapply(parameterValues$Linf,function(x) {x>lowScBin})
@@ -73,7 +73,6 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
   ##################################################################
   # calculate the proportion leaving each size class per time step, and time step
   phi <- calc_phi(nSizeClass,nSpecies,uppScBin,lowScBin,parameterValues)
-
   ##################################################################
   # calculate the ration, weight, efficiency and largest size class
   ration <- calc_ration(nSizeClass,nSpecies,uppScBin,lowScBin,midScBin,phi$phiMin,parameterValues)
@@ -82,21 +81,21 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
   mature <- calc_maturity(nSizeClass,nSpecies,midScBin,scLinfMat,ration$scLinf,parameterValues)
   ##################################################################
   # calculate M1 (residual natural mortality)
-  M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,alphaM1,betaM1,cM1,scLinfMat,ration$scLinf,phi$phiMin,parameterValues)
+  M1 <- calc_M1(nSizeClass,nSpecies,lowScBin,midScBin,modelSetup$alphaM1,modelSetup$betaM1,modelSetup$cM1,scLinfMat,ration$scLinf,phi$phiMin,parameterValues)
   ################################################################
   # calculated the size preference and the suitabilities
-  M2PrefSuit <- calc_sizepref_suitability(nSizeClass,nSpecies,midScBin,spMu,spSigma,ration$wgt,ration$scLinf,FW)
+  M2PrefSuit <- calc_sizepref_suitability(nSizeClass,nSpecies,midScBin,modelSetup$spMu,modelSetup$spSigma,ration$wgt,ration$scLinf,FW)
   ##################################################################
   # calculates the predation mortalities
   #M2calcs <- calc_M2_r(nSizeClass,nSpecies,initN,ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
-  M2calcs <- calc_M2_c(nSizeClass,nSpecies,initN,ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,modelSetupData$otherFood)
+  M2calcs <- calc_M2_c(nSizeClass,nSpecies,initN,ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,modelSetup$otherFood)
   ##################################################################
   # calculates the fishing mortalities
   # this will be extended to deal with more than one fleet
-  eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,modelSetupData$Falpha,modelSetupData$FL50,ration$scLinf,scLinfMat,phi$phiMin,parameterValues)
+  eF <- calc_F(nSizeClass,nSpecies,midScBin,lowScBin,Ffull,modelSetup$Falpha,modelSetup$FL50,ration$scLinf,scLinfMat,phi$phiMin,parameterValues)
   ##################################################################
   # calculate Recruits and SSB
-  recruits <- calc_recruits(initN,mature,ration$wgt,recruitAlphas,recruitBetas)
+  #recruits <- calc_recruits(initN,mature,ration$wgt,recruitAlphas,recruitBetas)
 
   ##################################################################
   # preallocate variables
@@ -130,6 +129,7 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
 
     # if we have entered the last step of the year (end of year) then a Recruitment event occurs
     if ((istep %% nTimeStepsPerYear) == 0) {
+      # calculate Recruits and SSB
       recruits <- calc_recruits(N[,,istep],mature,ration$wgt,recruitAlphas,recruitBetas)
       R[,iyear] <- recruits$recruits
       SSB[,iyear] <- recruits$SSB
@@ -139,7 +139,7 @@ key_run <- function(Ffull,nYrs,modelSetupData,parameterValues,initialValues,food
     }
 
     # calculate predation mortality, M2
-    M2calcs <- calc_M2_c(nSizeClass,nSpecies,N[,,istep],ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,modelSetupData$otherFood)
+    M2calcs <- calc_M2_c(nSizeClass,nSpecies,N[,,istep],ration$scLinf,ration$ration,ration$wgt,M2PrefSuit$suitability,phi$phiMin,modelSetup$otherFood)
     #M2calcs <- calc_M2_r(nSizeClass,nSpecies,N[,,istep],ration,M2PrefSuit$suitability,phi$phiMin,otherFood)
     M2[,,istep] <- M2calcs
     # calculate catch

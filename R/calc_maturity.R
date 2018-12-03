@@ -7,13 +7,13 @@
 #'@param mBound Mid point of each size class interval
 #'@param scLinfMat Binary matrix indicating which size classes each species occupies
 #'@param scLinf The size class at which each species reaches L_inf (maximum length)
-#'@param parameterValues Data. See \code{\link{data_parameterValues}}
+#'@param parameterValues Data. See \code{\link{rochet_GB_parameterValues}}
 
 #'
 #'@return A matrix is returned
 #'
-#'    \code{Maturity}    - nSize x nSpecies matrix of Maturity proportions where nSpecies = number of species and nSize = number of size classes.
-#'    Note that Maturity_i,j = 0 for size class i in which species j does not reach.
+#'    \item{Maturity}{nSize x nSpecies matrix of Maturity proportions where nSpecies = number of species and nSize = number of size classes.
+#'    Note that Maturity_i,j = 0 for size class i in which species j does not reach.}
 #'
 #'
 #'@section References:

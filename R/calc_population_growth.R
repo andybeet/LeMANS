@@ -11,7 +11,7 @@
 #'
 #'@return A list is returned
 #'
-#'    \code{N}   nSize x nSpecies matrix of abundance (number of individuals)
+#'    \item{N}{nSize x nSpecies matrix of abundance (number of individuals)}
 #'
 #'
 #'@section References:

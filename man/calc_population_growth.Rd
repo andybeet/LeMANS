@@ -19,7 +19,7 @@ Note that probGrowOut_i,j = 0 for size class i in which species j does not reach
 \value{
 A list is returned
 
-   \code{N}   nSize x nSpecies matrix of abundance (number of individuals)
+   \item{N}{nSize x nSpecies matrix of abundance (number of individuals)}
 }
 \description{
 Updates the species' population size. A function of the number of individuals that grow out of their present size class and the number that remain.

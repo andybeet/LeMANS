@@ -26,13 +26,13 @@ calc_M1(nSize, nSpecies, lBound, mBound, alphaM1, betaM1, cM1, scLinfMat,
 
 \item{phiMin}{Model timestep (years). See \code{\link{calc_phi}}}
 
-\item{parameterValues}{data. See \code{\link{data_parameterValues}}}
+\item{parameterValues}{data. See \code{\link{rochet_GB_parameterValues}}}
 }
 \value{
 A matrix is returned
 
-   \code{M1}    - nSize x nSpecies matrix of M1 (natural mortality) values where nSpecies = number of species and nSize = number of size classes.
-   Note that M1_i,j = 0 for size classes i in which species j does not reach
+   \item{M1}{nSize x nSpecies matrix of M1 (natural mortality) values where nSpecies = number of species and nSize = number of size classes.
+   Note that M1_i,j = 0 for size classes i in which species j does not reach}
 }
 \description{
 calculates other sources of natural mortality other than predation

@@ -15,15 +15,15 @@ calc_phi(nSize, nSpecies, uBound, lBound, parameterValues)
 
 \item{lBound}{lower bound of each size class interval}
 
-\item{parameterValues}{Data. See \code{\link{data_parameterValues}}}
+\item{parameterValues}{Data. See \code{\link{rochet_GB_parameterValues}}}
 }
 \value{
 A list is returned
 
-   \code{probGrowOut}    - nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
-   Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf.
+   \item{probGrowOut}{nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
+   Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf.}
 
-   \code{phiMin} Model timestep (years). (shortest time it takes any species to grow into nex size class. All species are normalized by this quantity)
+   \item{phiMin}{Model timestep (years). (shortest time it takes any species to grow into nex size class. All species are normalized by this quantity)}
 }
 \description{
 The proportion of individuals that leave each size class. Output is scaled relative to the species / size class combinations which is emptied fastest

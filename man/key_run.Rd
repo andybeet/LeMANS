@@ -4,39 +4,50 @@
 \alias{key_run}
 \title{Key_Run (Length-based Multispecies Analysis by numerical Simulation)}
 \usage{
-key_run(Ffull, nYrs, modelSetupData, parameterValues, initialValues,
-  foodweb, species)
+key_run(Ffull, nYrs, modelSetup, parameterValues, initialValues, foodweb,
+  species)
 }
 \arguments{
 \item{Ffull}{Fishing mortaliy rate for a fully recruited fish}
 
 \item{nYrs}{Number of years to simulate.}
 
-\item{modelSetupData}{list of parameters required for model (See \code{\link{data_modelSetup}})}
+\item{modelSetup}{list of parameters required for model (See \code{\link{rochet_GB_modelSetup}})}
 
-\item{parameterValues}{matrix of species specific parameters (See \code{\link{data_parameterValues}})}
+\item{parameterValues}{matrix of species specific parameters (See \code{\link{rochet_GB_parameterValues}})}
 
-\item{initialValues}{matrix of initial abundance estimates (See \code{\link{data_initialValues}})}
+\item{initialValues}{matrix of initial abundance estimates (See \code{\link{rochet_GB_initialValues}})}
 
-\item{foodweb}{predator prey food web (See \code{\link{data_foodweb}})}
+\item{foodweb}{predator prey food web (See \code{\link{rochet_GB_foodweb}})}
 
-\item{species}{matrix of species names and guild membership (See \code{\link{data_species}})}
+\item{species}{matrix of species names and guild membership (See \code{\link{rochet_GB_species}})}
 }
 \value{
 A list containing:
 
-   \code{N} 3D array of abundance (numbers of animals). nsizeClass x nSpecies x nTimeSteps
-   \code{M1} Matrix of M1 mortality ("natural"). nsizeClass x nSpecies
-   \code{M2} 3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps
-   \code{catch} 3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps
-   \code{SSB} Matrix of spawning stock biomass (SSB). nSpecies x nYears
-   \code{recruits} Matrix of recruits (numbers of animals). nSpecies x nYears
+   \item{N}{3D array of abundance (numbers of animals). nsizeClass x nSpecies x nTimeSteps}
+
+   \item{M1}{Matrix of M1 mortality ("natural"). nsizeClass x nSpecies}
+
+   \item{M2}{3D array M2 mortality (predation). nsizeClass x nSpecies x nTimeSteps}
+
+   \item{catch}{3D array of catch (numbers of animals). nsizeClass x nSpecies x nTimeSteps}
+
+   \item{SSB}{Matrix of spawning stock biomass (SSB). nSpecies x nYears}
+
+   \item{recruits    }{Matrix of recruits (numbers of animals). nSpecies x nYears}
 }
 \description{
 Runs the LeMANS model. currently loads Rochet et al data when package loads.
 The code was adapted directly from MATLAB code used for the
 Hall et al and Rochet et al papers.
 }
+\section{Using other data sets}{
+
+The number of size classes and the width of the size class interval should be decided upon a priori. This decision should be based on the maximum L_inf among all species.
+The \code{rochet_GB_initialValues} should be set up to represent the number of size classes.
+}
+
 \seealso{
-\code{\link{plot_key_run}} \code{\link{data_foodweb}}, \code{\link{data_initialValues}}, \code{\link{data_parameterValues}}, \code{\link{data_species}}
+\code{\link{plot_key_run}},  \code{\link{rochet_GB_foodweb}},  \code{\link{rochet_GB_initialValues}},  \code{\link{rochet_GB_parameterValues}},  \code{\link{rochet_GB_species}}
 }

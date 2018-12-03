@@ -28,13 +28,13 @@ calc_F(nSize, nSpecies, mBound, lBound, Ffull, Falpha, FL50, scLinf,
 
 \item{phiMin}{Model timestep (years). See  \code{\link{calc_phi}}}
 
-\item{parameterValues}{data. See \code{\link{data_parameterValues}}}
+\item{parameterValues}{data. See \code{\link{rochet_GB_parameterValues}}}
 }
 \value{
 A matrix is returned
 
-   \code{F}    - nSize x nSpecies matrix of F (fishing mortality) values where nSpecies = number of species and nSize = number of size classes.
-   Note that F_i,j = 0 for size classes i in which species j does not grow (based on von Bertalanfy growth curve)
+   \item{F}{nSize x nSpecies matrix of F (fishing mortality) values where nSpecies = number of species and nSize = number of size classes.
+   Note that F_i,j = 0 for size classes i in which species j does not grow (based on von Bertalanfy growth curve)}
 }
 \description{
 Calculates the fishing mortality for each species in each size

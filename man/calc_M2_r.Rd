@@ -24,8 +24,8 @@ calc_M2_r(nSize, nSpecies, N, ration, suitability, phiMin, otherFood)
 \value{
 A matrix is returned
 
-   \code{M2}    - nSize x nSpecies matrix of M2 (predation mortality) values where nSpecies = number of species and nSize = number of size classes.
-   Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.
+   \item{M2}{nSize x nSpecies matrix of M2 (predation mortality) values where nSpecies = number of species and nSize = number of size classes.
+   Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.}
 }
 \description{
 Calculates the predation mortality for each species in each size class

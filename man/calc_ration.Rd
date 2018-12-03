@@ -23,13 +23,13 @@ calc_ration(nSize, nSpecies, uBound, lBound, midBound, phiMin,
 \value{
 A list is returned
 
-   \code{ration} nSize x nSpecies matrix. (growth in time interval)/growth efficiency
+   \item{ration}{nSize x nSpecies matrix. (growth in time interval)/growth efficiency}
 
-   \code{wgt} Weight of average sized fish (each size class). Uses length weight relationship. See \code{data_parameterValues}
+   \item{wgt}{Weight of average sized fish (each size class). Uses length weight relationship. See \code{rochet_GB_parameterValues}}
 
-   \code{gEff} nSize x nSpecies matrix. Growth Efficiency of species j in size class i
+   \item{gEff}{nSize x nSpecies matrix. Growth Efficiency of species j in size class i}
 
-   \code{scLinf} The size class at which each species reaches L_inf (maximum length)
+   \item{scLinf}{ The size class at which each species reaches L_inf (maximum length)}
 }
 \description{
 Calculates the ration, weight, and growth efficiency for a species in a size class. Ration is defined as growth increment / growth efficiency

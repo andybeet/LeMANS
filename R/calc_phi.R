@@ -8,15 +8,15 @@
 #'@param nSpecies Number of species in the model
 #'@param uBound upper bound of each size class interval
 #'@param lBound lower bound of each size class interval
-#'@param parameterValues Data. See \code{\link{data_parameterValues}}
+#'@param parameterValues Data. See \code{\link{rochet_GB_parameterValues}}
 
 #'
 #'@return A list is returned
 #'
-#'    \code{probGrowOut}    - nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
-#'    Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf.
+#'    \item{probGrowOut}{nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
+#'    Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf.}
 #'
-#'    \code{phiMin} Model timestep (years). (shortest time it takes any species to grow into nex size class. All species are normalized by this quantity)
+#'    \item{phiMin}{Model timestep (years). (shortest time it takes any species to grow into nex size class. All species are normalized by this quantity)}
 #'
 #'@section References:
 #'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
