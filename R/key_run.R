@@ -28,6 +28,23 @@
 #'
 #'    \item{recruits    }{Matrix of recruits (numbers of animals). nSpecies x nYears}
 #'
+#'    \item{suitability}{3D array of prey suitability by predator. nsizeClass x nSpecies x (num Pred.size class combinations). See \code{\link{calc_sizepref_suitability}}}
+#'
+#'    \item{sizePreference}{3D array of prey preference by predator. nsizeClass x nSpecies x (num Pred.size class combinations). See \code{\link{calc_sizepref_suitability}}}
+#'
+#'    \item{ration}{Matrix. Amount consumed to account for growth. See \code{\link{calc_phi}}}
+#'
+#'    \item{growthEfficiency}{Matrix of growth efficiencies. See \code{\link{calc_phi}}}
+#'
+#'    \item{growthProportions}{Matrix of proportions. Proportion of individuals that leave each size class in each time step. See \code{\link{calc_phi}}}
+#'
+#'    \item{maturityProportions}{Matrix of maturity proportions. See \code{\link{calc_maturity}}}
+#'
+#'    \item{modelTimeStep}{scalar representing the fraction of a year each time step represents. See \code{\link{calc_phi}}}
+#'
+#'
+#'
+#'
 #'@section Using the Rochet et al data set:
   #'The number of size classes and the width of the size class was decided upon a priori.
   #'This decision was based on the maximum L_inf among all species. max(Linf) = 148 cm
@@ -167,6 +184,10 @@ key_run <- function(Ffull,nYrs,modelSetup,parameterValues,initialValues,foodweb,
   # end of run
   ##################################################################
 
-  return(list(N=N,M1=M1,M2=M2,eF=eF,catch=catch,SSB=SSB,recruits=R))
+
+  return(list(N=N,M1=M1,M2=M2,eF=eF,catch=catch,SSB=SSB,recruits=R,
+              modelTimeStep=phi$phiMin,growthProportions=phi$probGrowOut,
+              ration=ration$ration,growthEfficiency=ration$gEff,maturityProportions=mature,
+              suitability=M2PrefSuit$suitability,sizePreference=M2PrefSuit$sizePref))
 
 }
