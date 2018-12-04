@@ -5,7 +5,7 @@
 \title{Plots output from the key_run script}
 \usage{
 plot_key_run(dataSet, ylabel = "ylabel", is.aggregated = T,
-  speciesNames, scales = "fixed")
+  speciesNames, scales = "fixed", speciesSuitability = 1)
 }
 \arguments{
 \item{dataSet}{The data set to be plotted}
@@ -17,6 +17,8 @@ plot_key_run(dataSet, ylabel = "ylabel", is.aggregated = T,
 \item{speciesNames}{A data frame in the format of \code{\link{rochet_GB_species}}}
 
 \item{scales}{Text indicating is facet plots are displayed using same yaxis range ("fixed") or not ("free")}
+
+\item{speciesSuitabilityPlot}{Either species number or species name. Only required if passing suitability or size preference data. Default = 1.}
 }
 \description{
 Plots catch, N, M1, M2, SSB, recruits output from the model.

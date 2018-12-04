@@ -1,8 +1,7 @@
 #'Calculates size preference and suitability
 #'
 #'Calculates the lognormal probability functions for prey preferences, based on the predator/prey size (wgt) ratio.
-#'Returns a 3D matrix with the (prey/predator) body size ratio for predator of size i, species j, and prey size k species l.
-# then calculates standardized suitability based on foodweb matrix
+# Then calculates standardized suitability based on the foodweb matrix
 #'
 #'
 #'@param nSize Number of size class intervals species can grow through
@@ -21,6 +20,13 @@
 #'    \item{suitability}{3D array of predator size preference of prey size. (sizePref*Food Web)}
 #'
 #'
+#'@section Notes on 3D arrays:
+#'
+#'The 3D arrays contain prey size class in the rows, prey species in the columns (nSizeClass x nSpecies). The 1st dimension represents a predator/size class comnination.
+#'For example slice [1,,] represents the preference of predator species 1 in size class 1 to all prey species /size class combinations.
+#'The 1st dimension has length equal to nSpecies*nsizeClass. However many entries are zero determined by each species Linf
+#'
+#'
 #'@section References:
 #'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
 #'
@@ -36,6 +42,8 @@
 # then calculates standardized suitability based on foodweb matirx
 calc_sizepref_suitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scLinf,FW) {
   # should vectorize operations. # do later
+
+  # matrix for predator sizeclass
   # transpose foodweb. predator on rows, prey columns
   FW <- t(FW)
   # 3 dimensional array to utilize Rcpprmadillo's speed

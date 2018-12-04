@@ -21,3 +21,7 @@ library(LeMANS)
     plot_key_run(results$M2, ylabel = "Predation mortality", is.aggregated=F, rochet_GB_species, scales="fixed")
 
 
+## ----plot_suit, echo = TRUE----------------------------------------------
+    plot_key_run(results$suitability, ylabel = "Suitability", is.aggregated=F, rochet_GB_species, scales="free",speciesSuitability = "Forage fish")
+
+

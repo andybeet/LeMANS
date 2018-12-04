@@ -33,7 +33,7 @@ To run the model right out of the box:
 ```
 
 
-`results` is a list of several output variables (catch, recruits, M1, M2, F, spawning stock biomass, and N).
+`results` is a list of several output variables (catch, recruits, M1, M2, F, spawning stock biomass, N, and more).
 
 ```{r run2, echo=TRUE}
     str(results)
@@ -83,6 +83,12 @@ To produce a plot of M2 predation for each size class with species yaxes fixed a
 
 ```
 
+To produce a plot of the suitability forage fish to other species in the model
+
+```{r plot_suit, echo = TRUE}
+    plot_key_run(results$suitability, ylabel = "Suitability", is.aggregated=F, rochet_GB_species, scales="free",speciesSuitability = "Forage fish")
+
+```
 
 
 ## Publications {#pubs}
