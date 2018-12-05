@@ -42,6 +42,6 @@ results <- key_run(Ffull=0.4, nYrs=50, rochet_GB_modelSetup, rochet_GB_parameter
 
 To plot the catch output aggregated over sizeClass:
 
-plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)",is.aggregated=T,rochet_GB_species,scale="free")
+plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)", is.aggregated=T, speciesNames=rochet_GB_species, scale="free")
 
 
