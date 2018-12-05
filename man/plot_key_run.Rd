@@ -4,24 +4,56 @@
 \alias{plot_key_run}
 \title{Plots output from the key_run script}
 \usage{
-plot_key_run(dataSet, ylabel = "ylabel", is.aggregated = T,
-  speciesNames, scales = "fixed", speciesSuitability = 1)
+plot_key_run(dataSet, ylabel = "change this label", is.aggregated = F,
+  speciesNames, scales = "fixed", speciesSuitability = 1,
+  predOrPrey = "Prey")
 }
 \arguments{
-\item{dataSet}{The data set to be plotted}
+\item{dataSet}{The data set to be plotted. See \code{\link{key_run}}}
 
-\item{ylabel}{The yaxis label for the figure}
+\item{ylabel}{The yaxis label for the figure. Match this with the data.}
 
-\item{is.aggregated}{A logical value. Determines if aggregation is required over sizeClass}
+\item{is.aggregated}{A logical value. Determines if aggregation is required over sizeClass. Only valid for N, M2 and catch.}
 
 \item{speciesNames}{A data frame in the format of \code{\link{rochet_GB_species}}}
 
-\item{scales}{Text indicating is facet plots are displayed using same yaxis range ("fixed") or not ("free")}
+\item{scales}{Text indicating whether to display yaxis range fixed for all species ("fixed") or not ("free").}
 
-\item{speciesSuitabilityPlot}{Either species number or species name. Only required if passing suitability or size preference data. Default = 1.}
+\item{speciesSuitability}{Either species number or species name. Only required if passing suitability or size preference data. Default = 1.}
+
+\item{predOrPrey}{character string indicating whether to plot suitabiliy for species as the prey or predator. Values "prey" or "pred". Default = "Prey"}
 }
 \description{
-Plots catch, N, M1, M2, SSB, recruits output from the model.
-This is a rudimentary tool used for troubleshooting the model.
+Plots catch, N, M1, M2, SSB, recruits, suitability, growth efficiency, ration, maturity, and growth output from the model run.
+See \code{\link{key_run}} for details regarding obtaining output. This is a rudimentary tool used for troubleshooting the model.
 The user is expected to develop their own set of plotting tools for publication purposes
 }
+\section{Notes}{
+
+
+Not all arguments are required for plotting.
+\code{speciesSuitability} and \code{predOrPrey} are only required for plotting suitabilities (and size preferences).
+If you are plotting any other output data then you can ignore these arguments.
+In some cases \code{is.aggregated} is irrelevant. A warning will let you know that this is so.
+
+The suitability plots (similar for size preference plots) are interpreted in the following way:
+If \code{predOrPrey} = "prey" and \code{speciesSuitability} = "Atlantic cod" then each facet represents a predator of cod.
+Each line drawn represents a size class of the predator and displays its suitability for each size class (x axis) of Cod (prey)
+
+The units of the output variable are explained in \code{\link{key_run}}.
+
+
+'@examples
+\dontrun{
+# runs the model with bundled data from Rochet et al (2011).
+output <- key_run(Ffull=.4,nYrs=50,rochet_GB_modelSetup,rochet_GB_parameterValues,rochet_GB_initialValues,rochet_GB_foodweb,rochet_GB_species)
+
+# plots suitability of cod as a prey species to all other species in the model.
+plot_key_run(output$suitability,ylabel="Suitability",speciesNames=rochet_GB_species,scales="free",speciesSuitability = "atLANTIC coD",predOrPrey="prey")
+
+# plots catch (in millions of individuals) aggregated over size class for each species in the model.
+plot_key_run(output$catch/1E6,ylabel="Catch (millions of individuals)",is.aggregated = T,speciesNames=rochet_GB_species,scales="free")
+
+}
+}
+

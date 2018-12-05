@@ -1,15 +1,44 @@
 #' Plots output from the key_run script
 #'
-#' Plots catch, N, M1, M2, SSB, recruits output from the model.
-#' This is a rudimentary tool used for troubleshooting the model.
+#' Plots catch, N, M1, M2, SSB, recruits, suitability, growth efficiency, ration, maturity, and growth output from the model run.
+#' See \code{\link{key_run}} for details regarding obtaining output. This is a rudimentary tool used for troubleshooting the model.
 #' The user is expected to develop their own set of plotting tools for publication purposes
 #'
-#'@param dataSet The data set to be plotted
-#'@param ylabel The yaxis label for the figure
-#'@param is.aggregated A logical value. Determines if aggregation is required over sizeClass
+#'@param dataSet The data set to be plotted. See \code{\link{key_run}}
+#'@param ylabel The yaxis label for the figure. Match this with the data.
+#'@param is.aggregated A logical value. Determines if aggregation is required over sizeClass. Only valid for N, M2 and catch.
 #'@param speciesNames A data frame in the format of \code{\link{rochet_GB_species}}
-#'@param scales Text indicating is facet plots are displayed using same yaxis range ("fixed") or not ("free")
-#'@param speciesSuitabilityPlot Either species number or species name. Only required if passing suitability or size preference data. Default = 1.
+#'@param scales Text indicating whether to display yaxis range fixed for all species ("fixed") or not ("free").
+#'@param speciesSuitability Either species number or species name. Only required if passing suitability or size preference data. Default = 1.
+#'@param predOrPrey character string indicating whether to plot suitabiliy for species as the prey or predator. Values "prey" or "pred". Default = "Prey"
+#'
+#'@section Notes:
+#'
+#'Not all arguments are required for plotting.
+#'\code{speciesSuitability} and \code{predOrPrey} are only required for plotting suitabilities (and size preferences).
+#'If you are plotting any other output data then you can ignore these arguments.
+#'In some cases \code{is.aggregated} is irrelevant. A warning will let you know that this is so.
+#'
+#'The suitability plots (similar for size preference plots) are interpreted in the following way:
+#'If \code{predOrPrey} = "prey" and \code{speciesSuitability} = "Atlantic cod" then each facet represents a predator of cod.
+#'Each line drawn represents a size class of the predator and displays its suitability for each size class (x axis) of Cod (prey)
+#'
+#'The units of the output variable are explained in \code{\link{key_run}}.
+#'
+#'
+#''@examples
+#'\dontrun{
+#'# runs the model with bundled data from Rochet et al (2011).
+#' output <- key_run(Ffull=.4,nYrs=50,rochet_GB_modelSetup,rochet_GB_parameterValues,rochet_GB_initialValues,rochet_GB_foodweb,rochet_GB_species)
+#'
+#'# plots suitability of cod as a prey species to all other species in the model.
+#'plot_key_run(output$suitability,ylabel="Suitability",speciesNames=rochet_GB_species,scales="free",speciesSuitability = "atLANTIC coD",predOrPrey="prey")
+#'
+#'# plots catch (in millions of individuals) aggregated over size class for each species in the model.
+#'plot_key_run(output$catch/1E6,ylabel="Catch (millions of individuals)",is.aggregated = T,speciesNames=rochet_GB_species,scales="free")
+#'
+#'}
+#'
 #'
 #'
 #' @importFrom magrittr "%>%"
@@ -18,7 +47,7 @@
 #'
 #' @export
 
-plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames,scales="fixed",speciesSuitability=1) {
+plot_key_run <- function(dataSet,ylabel="change this label",is.aggregated=F,speciesNames,scales="fixed",speciesSuitability=1,predOrPrey="Prey") {
 
   speciesSuitability <- error_check(speciesSuitability,speciesNames)
 
@@ -48,34 +77,49 @@ plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames,sc
         facet_wrap( ~ commonName, scales = scales)
       print(p)
       options(warn=0)
-
     }
-  } else if ((length(dimOfData) > 2) & (dimOfData[1] != nSpecies)) { #  size preference and suitability
-    # we plot each prey species and plot
-    nSizeClasses <- dim(dataSet)[2]
-    predSc <- data.frame(species = rep(c(1:nSpecies),each  = nSizeClasses),sizeClass=rep(1:nSizeClasses))
-    addOnMAt <- apply(predSc,2,rep,nSpecies*nSizeClasses)
-    # map first column (predator/size class to df)
-    df <- cbind(predSc,df)
-    names(df) <- c("speciesNumber","predSizeClass","index","preySizeClass","preySpecies","dataF")
-    df <- dplyr::inner_join(df,speciesNames,"speciesNumber")
-    df <- dplyr::select(df,commonName,predSizeClass,preySizeClass,preySpecies,dataF)
-    df$commonName <- factor(df$commonName, levels = unique(df$commonName))
 
-    # need to plot a facet plot for each species
-    # see species suitability input
-    dfTemp <- dplyr::filter(df,preySpecies==speciesSuitability)
-       p <- ggplot2::ggplot(data=dfTemp) +
+  } else if ((length(dimOfData) > 2) & (dimOfData[1] != nSpecies)) { #  size preference and suitability
+    if (is.aggregated) warning("Aggregregation has no efect this data set")
+        # we plot each prey species and plot
+      nSizeClasses <- dim(dataSet)[2]
+      predSc <- data.frame(species = rep(c(1:nSpecies),each  = nSizeClasses),sizeClass=rep(1:nSizeClasses))
+      addOnMAt <- apply(predSc,2,rep,nSpecies*nSizeClasses)
+      # map first column (predator/size class to df)
+      df <- cbind(predSc,df)
+
+      if (tolower(predOrPrey) == "prey") {
+        names(df) <- c("speciesNumber","predSizeClass","index","preySizeClass","preySpecies","dataF")
+        df <- dplyr::inner_join(df,speciesNames,"speciesNumber")
+        df <- dplyr::select(df,commonName,predSizeClass,preySizeClass,preySpecies,dataF)
+        df$commonName <- factor(df$commonName, levels = unique(df$commonName))
+
+        # see species suitability input. Facet plot
+        df <- dplyr::filter(df,preySpecies==speciesSuitability)
+        p <- ggplot2::ggplot(data=df) +
           geom_line(mapping =  aes(x = preySizeClass, y = dataF, group = predSizeClass)) +
-          ylab(ylabel) + xlab(speciesNames$commonName[speciesSuitability]) +
+          ylab(ylabel) + xlab(paste0("Prey (sizeClass) = ",speciesNames$commonName[speciesSuitability])) +
           facet_wrap( ~ commonName, scales = scales)
         print(p)
-       # options(warn=0)
-       #
+      } else if (tolower(predOrPrey) == "pred") {
+        names(df) <- c("predSpecies","predSizeClass","index","preySizeClass","speciesNumber","dataF")
+        df <- dplyr::inner_join(df,speciesNames,"speciesNumber")
+        df <- dplyr::select(df,predSpecies,predSizeClass,preySizeClass,commonName,dataF)
+        df$commonName <- factor(df$commonName, levels = unique(df$commonName))
+
+        # see species suitability input. Facet plot
+        df <- dplyr::filter(df,predSpecies==speciesSuitability)
+        p <- ggplot2::ggplot(data=df) +
+          geom_line(mapping =  aes(x = predSizeClass, y = dataF, group = preySizeClass)) +
+          ylab(ylabel) + xlab(paste0("Predator (sizeClass) = ",speciesNames$commonName[speciesSuitability])) +
+          facet_wrap( ~ commonName, scales = scales)
+        print(p)
+
+     }
 
   } else if (length(dimOfData) == 2) { # output by species over time (SSB & recruits) or M1)
+    if (is.aggregated) warning("Aggregregation has no efect for 2D data sets")
     if (dimOfData[1] == dim(speciesNames)[1]) { # nSpeces x  nYears
-      if (is.aggregated) warning("Aggregregation has no efect for 2D data sets")
       names(df) <- c("speciesNumber","year","dataF")
       df <- dplyr::inner_join(df,speciesNames,"speciesNumber")
       df <- dplyr::select(df,commonName,year,dataF)
@@ -99,10 +143,7 @@ plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames,sc
       print(p)
       options(warn=0)
 
-
     }
-
-
 
   } else {
     stop("Not coded for structures other than 2D and 3D arrays")
@@ -111,7 +152,7 @@ plot_key_run <- function(dataSet,ylabel="ylabel",is.aggregated=T,speciesNames,sc
 }
 
 # internal function - not exported
-
+# check to make sure species entered for suitability conforms to either an interger or the species name
 error_check <- function(speciesID,speciesData) {
 
 
