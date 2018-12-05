@@ -48,7 +48,6 @@ Type `?key_run` for more help
 Several functions are invoked to set up the model. These functions can be changed by the user to suit their needs.
 
 * `calc_M1`
-* `calc_M2`
 * `calc_M2_c`
 * `calc_maturity`
 * `calc_phi`
@@ -62,31 +61,31 @@ Help is available for all functions or feel free to write your own to replace an
 
 ## Plotting {#plotting}
 
-Visualization of output is critical. A basic plotting tool is provided to view output. The user is encouraged to write their own plotting routines. To produce a plot of catch by species for each size class with all of the species yaxes scaled to their output:
+Visualization of output is critical. A basic plotting tool is provided to view output. The user is encouraged to write their own plotting routines.
 
+###To produce a plot of catch by species for each size class with all of the species yaxes scaled to their output:
 ```{r plot_c, echo = TRUE}
-    plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)", is.aggregated=F, rochet_GB_species, scales="free")
+    plot_key_run(results$catch/1E6, ylabel = "Catch (millions individuals)", speciesNames=rochet_GB_species, scales="free")
 
 ```
 
 
-To produce a plot of total abundance aggregated over each size class with species yaxes fixed across all species:
+###To produce a plot of total abundance aggregated over each size class with species yaxes fixed across all species:
 ```{r plot_n, echo = TRUE}
-    plot_key_run(results$N/1E6, ylabel = "Abundance (millions individuals)", is.aggregated=T, rochet_GB_species, scales="free")
+    plot_key_run(results$N/1E6, ylabel = "Abundance (millions individuals)", is.aggregated=T, speciesNames=rochet_GB_species, scales="free")
 
 ```
 
 
-To produce a plot of M2 predation for each size class with species yaxes fixed across all species:
+###To produce a plot of M2 predation for each size class with species yaxes fixed across all species:
 ```{r plot_m2, echo = TRUE}
-    plot_key_run(results$M2, ylabel = "Predation mortality", is.aggregated=F, rochet_GB_species, scales="fixed")
+    plot_key_run(results$M2, ylabel = "Predation mortality", speciesNames=rochet_GB_species, scales="fixed")
 
 ```
 
-To produce a plot of the suitability forage fish to other species in the model
-
+###To produce a plot of the suitability forage fish to other species in the model:
 ```{r plot_suit, echo = TRUE}
-    plot_key_run(results$suitability, ylabel = "Suitability", is.aggregated=F, rochet_GB_species, scales="free",speciesSuitability = "Forage fish")
+    plot_key_run(results$suitability, ylabel = "Suitability", speciesNames = rochet_GB_species, scales="free",speciesSuitability = "Forage fish",predOrPrey = "prey")
 
 ```
 
