@@ -1,8 +1,8 @@
 #'Key_Run (Length-based Multispecies Analysis by numerical Simulation)
 #'
-#'Runs the LeMANS model. currently loads Rochet et al data when package loads.
-#'The code was adapted directly from MATLAB code used for the
-#'Hall et al and Rochet et al papers.
+#'Runs the LeMANS model with the bundled data.
+#'Bundled data conist of the 22 species used in the Rochet et al (2011) paper to represent Georges Bank. See \code{\link{rochet_GB_species}}.
+#'The code was adapted directly from MATLAB code used in the Hall et al (2006) and Rochet et al (2011) papers.
 #'
 #'@param Ffull Fishing mortaliy rate for a fully recruited fish
 #'@param nYrs Number of years to simulate.
@@ -61,6 +61,13 @@
   #'
   #'
 #'@seealso \code{\link{plot_key_run}},  \code{\link{rochet_GB_foodweb}},  \code{\link{rochet_GB_initialValues}},  \code{\link{rochet_GB_parameterValues}},  \code{\link{rochet_GB_species}}
+#'
+#'
+#'@examples
+#'\dontrun{
+#'#'# runs the model with bundled data from Rochet et al (2011).
+#' output <- key_run(Ffull=.4,nYrs=50,rochet_GB_modelSetup,rochet_GB_parameterValues,rochet_GB_initialValues,rochet_GB_foodweb,rochet_GB_species)
+#'}
 #'@export
 
 

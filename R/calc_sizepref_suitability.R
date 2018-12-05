@@ -1,23 +1,25 @@
-#'Calculates size preference and suitability
+#'Calculates size preference and suitabilities
 #'
-#'Calculates the lognormal probability functions for prey preferences, based on the predator/prey size (wgt) ratio.
-# Then calculates standardized suitability based on the foodweb matrix
+#'Size preferences for prey species by predator species are modelld with a lognormal distribution.
+#'The bundled data use a parameterization that gives a maximal preference to prey that are approximately 1/33rd the weight of the predator.
+# suitabilities are standardized (to sum to one) size preferences for predator/prey interactions speciefied in the foodweb ( \code{\link{rochet_GB_foodweb)}}
 #'
 #'
 #'@param nSize Number of size class intervals species can grow through
 #'@param nSpecies Number of species in the model
 #'@param mBound Mid point of each size class interval
-#'@param spMu Mean of log normal distribution
-#'@param spSigma Standard deviation of the log normal distribution
+#'@param spMu Mean of log normal distribution. See \code{\link{rochet_GB_modelSetup}}
+#'@param spSigma Standard deviation of the log normal distribution. See \code{\link{rochet_GB_modelSetup}}
 #'@param wgt Weight of species at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}
-#'@param scLinf The size class at which each species reaches L_inf (maximum length)
+#'@param scLinf The size class at which each species reaches L_inf (maximum length). See \code{\link{calc_ration}}
 #'@param FW Food web represented as a binary matrix. Predator (columns) and prey (rows). See \code{\link{rochet_GB_foodweb}}
 #'
 #'@return A list is returned
 #'
-#'    \item{sizePref}{3D array of predator size preference of prey size.}
+#'    \item{sizePref}{3D array of prey size preference for predator size.}
 #'
-#'    \item{suitability}{3D array of predator size preference of prey size. (sizePref*Food Web)}
+#'    \item{suitability}{3D array of prey size suitability for predator size. Suitability is calculated as (sizePref*Food Web). These
+#'    values are then standardized across all prey species/size classes for a given predator in a size class}
 #'
 #'
 #'@section Notes on 3D arrays:
@@ -65,7 +67,7 @@ calc_sizepref_suitability <- function(nSize,nSpecies,mBound,spMu,spSigma,wgt,scL
     }
   }
 
-  # standardize the suitabilirties so sum to 1 (Hall et al reference to Magnuson (multispecies vpa) 1995)
+  # standardize the suitabilities so sum to 1 (Hall et al reference to Magnuson (multispecies vpa) 1995)
   for (isp in 1:nSpecies) {
     for (isize in 1:scLinf[isp]) {
       index <- ((isp-1)*nSize) + isize

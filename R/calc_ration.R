@@ -1,24 +1,25 @@
 #'Calculate species ration, growth efficiency, and size class weight
 #'
-#' Calculates the ration, weight, and growth efficiency for a species in a size class. Ration is defined as growth increment / growth efficiency
+#' Calculates the ration, weight, and growth efficiency for a species in a size class.
+#' Ration is defined as the amount consumed to account for growth (growth increment / growth efficiency)
 #'
 #'
 #'@param nSize Number of size class intervals species can grow through
 #'@param nSpecies Number of species in the model
-#'@param uBound upper bound of each size class interval
-#'@param lBound lower bound of each size class interval
-#'@param mBound mid point of each size class interval
-#'@param phiMin Model timestep (years). See \code{\link{calc_phi}}
+#'@param uBound Upper bound of each size class interval
+#'@param lBound Lower bound of each size class interval
+#'@param mBound Mid point of each size class interval
+#'@param phiMin Model time step (years). See \code{\link{calc_phi}}
 #'
 #'@return A list is returned
 #'
-#'    \item{ration}{nSize x nSpecies matrix. (growth in time interval)/growth efficiency}
+#'    \item{ration}{matrix of size nSize x nSpecies. Amount consumed to account for growth (growth in time interval)/growth efficiency}
 #'
-#'    \item{wgt}{Weight of average sized fish (each size class). Uses length weight relationship. See \code{rochet_GB_parameterValues}}
+#'    \item{wgt}{matrix of size nSize x nSpecies. Weight of average sized fish in each size class. Uses length weight relationship. See \code{rochet_GB_parameterValues}}
 #'
-#'    \item{gEff}{nSize x nSpecies matrix. Growth Efficiency of species j in size class i}
+#'    \item{gEff}{matrix of size nSize x nSpecies. Growth Efficiencies}
 #'
-#'    \item{scLinf}{ The size class at which each species reaches L_inf (maximum length)}
+#'    \item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
 #'
 #'
 #'@section References:

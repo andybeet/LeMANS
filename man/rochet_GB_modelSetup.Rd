@@ -19,7 +19,7 @@
      \item{forageFishAlpha}{Trial for forage fish}
      \item{alphaM1}{beta pdf parameter to model M1}
      \item{betaM1}{beta pdf parameter to model M1}
-     \item{cM1}{scaling of pdf to model M1}
+     \item{cM1}{Scaling of pdf to model M1}
      \item{spMu}{Mean of size preference function }
      \item{spSigma}{Standard deviation of size preference function}
 
@@ -33,7 +33,8 @@ Rochet et al. (2011). Does selective fishing conserve community biodiversiy? Pre
 rochet_GB_modelSetup
 }
 \description{
-A list of other parameter values required for the model to run
+A list of parameter values that are not species specific that are required for the model to run.
+All values are Scalar values.
 }
 \seealso{
 \code{\link{rochet_GB_foodweb}}, \code{\link{rochet_GB_initialValues}}, \code{\link{rochet_GB_parameterValues}}, \code{\link{rochet_GB_species}}, \code{\link{rochet_GB_modelSetup}}

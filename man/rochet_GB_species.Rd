@@ -4,9 +4,9 @@
 \name{rochet_GB_species}
 \alias{rochet_GB_species}
 \title{Species descriptions}
-\format{A data frame of size 22 x 4. Species in rows. The columns are defined as:
+\format{A data frame of size nSpecies x 4. Species in rows. The columns are defined as:
 \describe{
-    \item{speciesNumber}{Ordered sequence of species numbers}
+    \item{speciesNumber}{Ordered sequence of species numbers }
     \item{commonName}{Common name for species}
     \item{scientificName}{Latin name for species}
     \item{guild}{Associated guild name for species}

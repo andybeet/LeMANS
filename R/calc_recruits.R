@@ -3,18 +3,18 @@
 #'The number of recruits are estimated as a function of SSB using the Ricker stock-recruitment relationship.
 #'The SSB is estimated as a function of the number of mature individuals.
 #'
-#'@param N nSize x nSpecies matrix of abundance (number of individuals)
-#'@param maturity nSize x nSpecies matrix of the proportion of each size class for each species that is mature (\code{\link{calc_maturity}})
-#'@param wgt Weight of species at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}
-#'@param recAlpha Scale parameter of the Ricker S-R relationship. A vector of length nSpecies.
-#'@param recBeta Shape parameter of the Ricker S-R relationship. A vector of length nSpecies.
+#'@param N A matrix (nSize x nSpecies) of abundance (number of individuals)
+#'@param maturity A matrix (nSize x nSpecies) of the proportion of individuals that are considered mature (\code{\link{calc_maturity}})
+#'@param wgt A matrix (nSize x nSpecies) of an individuals weight at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}
+#'@param recAlpha A vector (length nSpecies). Scale parameter of the Ricker S-R relationship.
+#'@param recBeta A vector (length nSpecies). Shape parameter of the Ricker S-R relationship.
 
 #'
 #'@return A list is returned
 #'
-#'    \item{recruits}{Number of recruits (millions). A vector of length nSpecies.}
+#'    \item{recruits}{A vector (length nSpecies). Number of recruits (millions).}
 #'
-#'    \item{SSB}{SSB (1000's tonnes). A vector of length nSpecies.}
+#'    \item{SSB}{A vector (length nSpecies). SSB (1000's tonnes).}
 #'
 #'@section References:
 #'Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.

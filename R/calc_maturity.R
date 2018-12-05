@@ -1,19 +1,19 @@
 #'Calculates Maturity
 #'
-#'The proportion of each size class for each species that is mature and contributes to SSB.
+#'The proportion of each species (in each size class) that are considered mature.
+#'Matrue indisviduals contribute to SSB.
 #'
 #'@param nSize Number of size class intervals species can grow through
 #'@param nSpecies Number of species in the model
 #'@param mBound Mid point of each size class interval
-#'@param scLinfMat Binary matrix indicating which size classes each species occupies
-#'@param scLinf The size class at which each species reaches L_inf (maximum length)
-#'@param parameterValues Data. See \code{\link{rochet_GB_parameterValues}}
-
+#'@param scLinfMat A matrix (nSize x nSpecies) of binary values indicating which size classes each species occupies.
+#'@param scLinf A vector (length nSpecies) of size classes indicating the maximum size class a species can occupy. Based on L_inf (maximum length)
+#'@param parameterValues A Matrix of species specific parameters. See \code{\link{rochet_GB_parameterValues}}
 #'
 #'@return A matrix is returned
 #'
-#'    \item{Maturity}{nSize x nSpecies matrix of Maturity proportions where nSpecies = number of species and nSize = number of size classes.
-#'    Note that Maturity_i,j = 0 for size class i in which species j does not reach.}
+#'    \item{Maturity}{A matrix (nSize x nSpecies) of Maturity proportions.
+#'    Note: Maturity = 0 for size classes in which a species does not reach.}
 #'
 #'
 #'@section References:

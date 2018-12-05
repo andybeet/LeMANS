@@ -3,7 +3,6 @@
 export(calc_F)
 export(calc_M1)
 export(calc_M2_c)
-export(calc_M2_r)
 export(calc_maturity)
 export(calc_phi)
 export(calc_population_growth)

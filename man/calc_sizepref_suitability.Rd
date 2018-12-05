@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_sizepref_suitability.R
 \name{calc_sizepref_suitability}
 \alias{calc_sizepref_suitability}
-\title{Calculates size preference and suitability}
+\title{Calculates size preference and suitabilities}
 \usage{
 calc_sizepref_suitability(nSize, nSpecies, mBound, spMu, spSigma, wgt,
   scLinf, FW)
@@ -14,25 +14,27 @@ calc_sizepref_suitability(nSize, nSpecies, mBound, spMu, spSigma, wgt,
 
 \item{mBound}{Mid point of each size class interval}
 
-\item{spMu}{Mean of log normal distribution}
+\item{spMu}{Mean of log normal distribution. See \code{\link{rochet_GB_modelSetup}}}
 
-\item{spSigma}{Standard deviation of the log normal distribution}
+\item{spSigma}{Standard deviation of the log normal distribution. See \code{\link{rochet_GB_modelSetup}}}
 
 \item{wgt}{Weight of species at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}}
 
-\item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
+\item{scLinf}{The size class at which each species reaches L_inf (maximum length). See \code{\link{calc_ration}}}
 
 \item{FW}{Food web represented as a binary matrix. Predator (columns) and prey (rows). See \code{\link{rochet_GB_foodweb}}}
 }
 \value{
 A list is returned
 
-   \item{sizePref}{3D array of predator size preference of prey size.}
+   \item{sizePref}{3D array of prey size preference for predator size.}
 
-   \item{suitability}{3D array of predator size preference of prey size. (sizePref*Food Web)}
+   \item{suitability}{3D array of prey size suitability for predator size. Suitability is calculated as (sizePref*Food Web). These
+   values are then standardized across all prey species/size classes for a given predator in a size class}
 }
 \description{
-Calculates the lognormal probability functions for prey preferences, based on the predator/prey size (wgt) ratio.
+Size preferences for prey species by predator species are modelld with a lognormal distribution.
+The bundled data use a parameterization that gives a maximal preference to prey that are approximately 1/33rd the weight of the predator.
 }
 \section{Notes on 3D arrays}{
 

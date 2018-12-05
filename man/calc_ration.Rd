@@ -12,27 +12,28 @@ calc_ration(nSize, nSpecies, uBound, lBound, midBound, phiMin,
 
 \item{nSpecies}{Number of species in the model}
 
-\item{uBound}{upper bound of each size class interval}
+\item{uBound}{Upper bound of each size class interval}
 
-\item{lBound}{lower bound of each size class interval}
+\item{lBound}{Lower bound of each size class interval}
 
-\item{phiMin}{Model timestep (years). See \code{\link{calc_phi}}}
+\item{phiMin}{Model time step (years). See \code{\link{calc_phi}}}
 
-\item{mBound}{mid point of each size class interval}
+\item{mBound}{Mid point of each size class interval}
 }
 \value{
 A list is returned
 
-   \item{ration}{nSize x nSpecies matrix. (growth in time interval)/growth efficiency}
+   \item{ration}{matrix of size nSize x nSpecies. Amount consumed to account for growth (growth in time interval)/growth efficiency}
 
-   \item{wgt}{Weight of average sized fish (each size class). Uses length weight relationship. See \code{rochet_GB_parameterValues}}
+   \item{wgt}{matrix of size nSize x nSpecies. Weight of average sized fish in each size class. Uses length weight relationship. See \code{rochet_GB_parameterValues}}
 
-   \item{gEff}{nSize x nSpecies matrix. Growth Efficiency of species j in size class i}
+   \item{gEff}{matrix of size nSize x nSpecies. Growth Efficiencies}
 
-   \item{scLinf}{ The size class at which each species reaches L_inf (maximum length)}
+   \item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
 }
 \description{
-Calculates the ration, weight, and growth efficiency for a species in a size class. Ration is defined as growth increment / growth efficiency
+Calculates the ration, weight, and growth efficiency for a species in a size class.
+Ration is defined as the amount consumed to account for growth (growth increment / growth efficiency)
 }
 \section{References}{
 

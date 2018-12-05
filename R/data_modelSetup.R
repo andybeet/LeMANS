@@ -1,6 +1,7 @@
 #' List of species independent parameters
 #'
-#' A list of other parameter values required for the model to run
+#' A list of parameter values that are not species specific that are required for the model to run.
+#' All values are Scalar values.
 #'
 #' @format A list of species independent parameters:
 #' \describe{
@@ -17,7 +18,7 @@
 #'      \item{forageFishAlpha}{Trial for forage fish}
 #'      \item{alphaM1}{beta pdf parameter to model M1}
 #'      \item{betaM1}{beta pdf parameter to model M1}
-#'      \item{cM1}{scaling of pdf to model M1}
+#'      \item{cM1}{Scaling of pdf to model M1}
 #'      \item{spMu}{Mean of size preference function }
 #'      \item{spSigma}{Standard deviation of size preference function}
 #'

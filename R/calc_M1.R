@@ -1,25 +1,24 @@
 #'Calculates M1 mortality
 #'
-#'calculates other sources of natural mortality other than predation
-#' assumption: follows a beta distribution and that the smaller the size class the greater the mortality
-#' this is based on the ratio of the sizeclass midpoint to the largest sizeclass midpoint (0,1) variable
+#'calculates other sources of natural mortality other than predation.
+#'It is assumed that M1 mortality follows a beta distribution and that in general the small and large size classses suffer the greatest mortality.
 #'
 #'@param nSize Number of size class intervals species can grow through
 #'@param nSpecies Number of species in the model
-#'@param lBound lower bound of each size class interval
-#'@param mBound mid point of each size class interval
-#'@param alphaM1 Shape parameter alpha of the beta distribution
-#'@param betaM1 Shape parameter beta of the beta distribution
-#'@param cM1 scales the pdf ??????
+#'@param lBound Lower bound of each size class interval
+#'@param mBound Mid point of each size class interval
+#'@param alphaM1 Shape parameter (alpha) of the beta distribution
+#'@param betaM1 Shape parameter (beta) of the beta distribution
+#'@param cM1 Scales the pdf ??????
 #'@param scLinf The size class at which each species reaches L_inf (maximum length)
 #'@param phiMin Model timestep (years). See \code{\link{calc_phi}}
-#'@param parameterValues data. See \code{\link{rochet_GB_parameterValues}}
+#'@param parameterValues Matrix of species specific parameters. See \code{\link{rochet_GB_parameterValues}}
 
 #'
 #'@return A matrix is returned
 #'
-#'    \item{M1}{nSize x nSpecies matrix of M1 (natural mortality) values where nSpecies = number of species and nSize = number of size classes.
-#'    Note that M1_i,j = 0 for size classes i in which species j does not reach}
+#'    \item{M1}{A matrix (size nSize x nSpecies) of M1 (natural mortality) values.
+#'    Note: M1 = 0 for size classes in which a species does not reach/grow in to.}
 #'
 #'
 #'@section References:

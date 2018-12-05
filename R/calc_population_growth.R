@@ -1,17 +1,17 @@
 #'Calculates the change in the poulation in each time step
 #'
-#'Updates the species' population size. A function of the number of individuals that grow out of their present size class and the number that remain.
+#'Updates the species' population size. This change is a function of the number of individuals that grow out of their present size class and the number that remain.
 #'
 #'@param nSize Number of size class intervals species can grow through
 #'@param nSpecies Number of species in the model
-#'@param N nSize x nSpecies matrix of abundance (number of individuals)
-#'@param probGrowOut nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
-#'    Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf. See \code{\link{calc_phi}}
+#'@param N A matrix (nSize x nSpecies) of species abundance (number of individuals)
+#'@param probGrowOut A matrix (nSize x nSpecies) of proportions.
+#'    Note: probGrowOut = 0 for size classes in which a species does not reach and probGrowOut = 0 for largest size class. It is not possible to grow out of the largest size class since it is determined by Linf. See \code{\link{calc_phi}}
 #'
 #'
 #'@return A list is returned
 #'
-#'    \item{N}{nSize x nSpecies matrix of abundance (number of individuals)}
+#'    \item{N}{A matrix (nSize x nSpecies) of abundance (number of individuals)}
 #'
 #'
 #'@section References:

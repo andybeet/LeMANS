@@ -11,24 +11,25 @@ calc_phi(nSize, nSpecies, uBound, lBound, parameterValues)
 
 \item{nSpecies}{Number of species in the model}
 
-\item{uBound}{upper bound of each size class interval}
+\item{uBound}{Upper bound of each size class interval}
 
-\item{lBound}{lower bound of each size class interval}
+\item{lBound}{Lower bound of each size class interval}
 
-\item{parameterValues}{Data. See \code{\link{rochet_GB_parameterValues}}}
+\item{parameterValues}{A Matrix of species specific parameters. See \code{\link{rochet_GB_parameterValues}}}
 }
 \value{
 A list is returned
 
-   \item{probGrowOut}{nSize x nSpecies matrix of probabilities/proportions. Where nSpecies = number of species and nSize = number of size classes.
-   Note that probGrowOut_i,j = 0 for size class i in which species j does not reach and probGrowOut_i_j = 0 for largest size class for each species based on Linf.}
+   \item{probGrowOut}{A matrix of size nSize x nSpecies of proportions. A cell represent the proportion of individuals growing into the following cell.
+   Note: probGrowOut = 0 for size classes in which a species does not reach (due to its L_inf). probGrowOut = 0 for largest size class for each species}
 
-   \item{phiMin}{Model timestep (years). (shortest time it takes any species to grow into nex size class. All species are normalized by this quantity)}
+   \item{phiMin}{Model timestep (years). Shhortest time taken by any species to grow into next size class. probGrowOut is normalized by this quantity)}
 }
 \description{
-The proportion of individuals that leave each size class. Output is scaled relative to the species / size class combinations which is emptied fastest
-so that this combination empties completely in one timestep. The time (yrs) for an average fish to grow from the lower to the upper limit of a size class (Hilborn & Walters p428, eqn 13.7.2)
-ie scaled to fasted growing individual
+The proportion of individuals that leave each size class. These proportion are scaled to the fastest growing species/size class combination.
+This ensures that no species can grow though more than one class interval in any time step.
+This is based on the time (yrs) for an average fish to grow from the lower limit of a size class to the
+upper limit of a size class (Hilborn & Walters p428, eqn 13.7.2).
 }
 \section{References}{
 

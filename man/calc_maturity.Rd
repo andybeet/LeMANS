@@ -13,20 +13,21 @@ calc_maturity(nSize, nSpecies, mBound, scLinfMat, scLinf, parameterValues)
 
 \item{mBound}{Mid point of each size class interval}
 
-\item{scLinfMat}{Binary matrix indicating which size classes each species occupies}
+\item{scLinfMat}{A matrix (nSize x nSpecies) of binary values indicating which size classes each species occupies.}
 
-\item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
+\item{scLinf}{A vector (length nSpecies) of size classes indicating the maximum size class a species can occupy. Based on L_inf (maximum length)}
 
-\item{parameterValues}{Data. See \code{\link{rochet_GB_parameterValues}}}
+\item{parameterValues}{A Matrix of species specific parameters. See \code{\link{rochet_GB_parameterValues}}}
 }
 \value{
 A matrix is returned
 
-   \item{Maturity}{nSize x nSpecies matrix of Maturity proportions where nSpecies = number of species and nSize = number of size classes.
-   Note that Maturity_i,j = 0 for size class i in which species j does not reach.}
+   \item{Maturity}{A matrix (nSize x nSpecies) of Maturity proportions.
+   Note: Maturity = 0 for size classes in which a species does not reach.}
 }
 \description{
-The proportion of each size class for each species that is mature and contributes to SSB.
+The proportion of each species (in each size class) that are considered mature.
+Matrue indisviduals contribute to SSB.
 }
 \section{References}{
 

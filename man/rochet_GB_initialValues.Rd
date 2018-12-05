@@ -3,9 +3,9 @@
 \docType{data}
 \name{rochet_GB_initialValues}
 \alias{rochet_GB_initialValues}
-\title{Ititial abundance values}
-\format{A data frame of size 22 x 15
-\describe{abundance (#catch per tow) in each species size class. Size classes are of equal length; the width (cm) determined by Linf.
+\title{Intitial abundance values}
+\format{A data frame of size nSpecies x nSize
+\describe{abundance (number of individuls) in each species size class. Size classes are of equal length; the width (cm) determined by Linf.
 Species in rows, size classes in columns.
 The list of species can be found in \code{\link{rochet_GB_species}} and in the references below
 }}
@@ -18,7 +18,7 @@ Rochet et al. (2011). Does selective fishing conserve community biodiversiy? Pre
 rochet_GB_initialValues
 }
 \description{
-starting conditions for all species in each of the species size classes
+Initial abundances for all species in each of the size classes
 }
 \seealso{
 \code{\link{rochet_GB_foodweb}}, \code{\link{rochet_GB_initialValues}}, \code{\link{rochet_GB_parameterValues}}, \code{\link{rochet_GB_species}}, \code{\link{rochet_GB_modelSetup}}

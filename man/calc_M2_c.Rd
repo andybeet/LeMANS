@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{calc_M2_c}
 \alias{calc_M2_c}
-\title{Calculates predation mortality, M2, in C++}
+\title{Calculates predation mortality, M2 (C++)}
 \usage{
 calc_M2_c(nSize, nSpecies, N, scLinf, ration, wgt, suitability, phiMin,
   otherFood)
@@ -12,25 +12,25 @@ calc_M2_c(nSize, nSpecies, N, scLinf, ration, wgt, suitability, phiMin,
 
 \item{nSpecies}{Number of species in the model}
 
-\item{N}{nSize x nSpecies matrix of abundance (number of individuals)}
+\item{N}{A matrix (nSize x nSpecies) of abundance (number of individuals)}
 
-\item{scLinf}{The size class at which each species reaches L_inf (maximum length)}
+\item{scLinf}{A vector (nSpecies) of the size class at which each species reaches L_inf (maximum length)}
 
-\item{ration}{nSize x nSpecies matrix. (growth in time interval)/growth efficiency. See \code{\link{calc_ration}}}
+\item{ration}{A matrix (nSize x nSpecies) of (growth in time interval)/growth efficiency values. See \code{\link{calc_ration}}}
 
-\item{wgt}{Weight of species at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}}
+\item{wgt}{A matrix (nSize x nSpecies) of species weight at the mid point of each size class (Units: grams). See \code{\link{calc_ration}}}
 
-\item{suitability}{3D array of predator size preference of prey size. See \code{\link{calc_sizepref_suitability}}}
+\item{suitability}{3D array of predator size preference for prey size. See \code{\link{calc_sizepref_suitability}}}
 
-\item{phiMin}{Model timestep (years). See \code{\link{calc_phi}}}
+\item{phiMin}{Scalar. Model timestep (years). See \code{\link{calc_phi}}}
 
-\item{otherFood}{Amount of other food available not accounted for in the model (g)}
+\item{otherFood}{Scalar. Amount of other food available not accounted for in the model (g)}
 }
 \value{
 A matrix is returned
 
-  \code{M2}    - nSize x nSpecies matrix of M2 (predation mortality) values.
-   Note that M2_i,j = 0 for size classes i in which species j is not preyed upon.
+  \item{M2}{A matrix (nSize x nSpecies) of M2 (predation mortality) values.
+   Note: M2 = 0 for size classes in which a species is not preyed upon.}
 }
 \description{
 Calculates the predation mortality for each species in each size class
