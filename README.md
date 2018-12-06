@@ -32,18 +32,18 @@ browseVignettes("LeMANS")
 
 The code was developed with a similar structure to the MATLAB code. Supporting data files are lazily loaded and ready to use.
 
-* rochet_GB_foodweb  - Predator-prey matrix (binary). Predator (column), prey (row)
-* rochet_GB_initialValues  - number of individuals per tow for each species/sizeclass combination
-* rochet_GB_parameterValues - carrying capacity (k), Maximum length (Linf) + for each species
-* rochet_GB_species - lists common name, scientific name, and guild each species is a member of.
-* rochet_GB_modelSetup - A list containing species independent parameter values (otherFood, Falpha, FL50)
+* `rochet_GB_foodweb`  - Predator-prey matrix (binary). Predator (column), prey (row)
+* `rochet_GB_initialValues`  - number of individuals per tow for each species/sizeclass combination
+* `rochet_GB_parameterValues` - carrying capacity (k), Maximum length (Linf) + for each species
+* `rochet_GB_species` - lists common name, scientific name, and guild each species is a member of.
+* `rochet_GB_modelSetup` - A list containing species independent parameter values (otherFood, Falpha, FL50)
 
 To run the model with parameter values described in the Rochet et al paper simply type:
 
-results <- key_run(Ffull=0.4, nYrs=50, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)
+`results <- key_run(Ffull=0.4, nYrs=50, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)`
 
 To plot the catch output aggregated over sizeClass:
 
-plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)", is.aggregated=T, speciesNames=rochet_GB_species, scale="free")
+`plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)", is.aggregated=T, speciesNames=rochet_GB_species, scale="free")`
 
 
