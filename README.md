@@ -24,6 +24,8 @@ Originally coded in MATLAB
 
 devtools::install_github("andybeet/LeMANS",build_vignettes = TRUE)
 
+If you don't have devtools installed you will see an error "there is no package called 'devtools'"; if that happens install devtools with `install.packages("devtools")`.
+
 ### Help
 
 browseVignettes("LeMANS")
