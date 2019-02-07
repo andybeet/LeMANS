@@ -8,6 +8,8 @@ Details of the model can be found in the follwing publications:
 
 Originally coded in MATLAB
 
+Commments/questions/bugs should be documented at [https://github.com/andybeet/LeMANS/issues](https://github.com/andybeet/LeMANS/issues)
+
 ## Features
 
 * Each component of the model (M1, M2, F, suitability, size preference etc) has been modularized such that a users code block can be substitued.
