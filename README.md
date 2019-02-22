@@ -28,6 +28,8 @@ devtools::install_github("andybeet/LeMANS",build_vignettes = TRUE)
 
 If you don't have devtools installed you will see an error "there is no package called 'devtools'"; if that happens install devtools with `install.packages("devtools")`.
 
+If installation of LeMANS fails, it could be due to the Rcpp package. Try to install Rcpp first.
+
 ### Help
 
 browseVignettes("LeMANS")
