@@ -45,7 +45,7 @@ Type `?key_run` for more help
 
 ## Intermediate functions
 
-Several functions are invoked to set up the model. These functions can be changed by the user to suit their needs.
+Several functions are invoked when running the model. These functions can be changed by the user to suit their needs.
 
 * `calc_M1`
 * `calc_M2_c`

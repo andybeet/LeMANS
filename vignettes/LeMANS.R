@@ -10,18 +10,18 @@ library(LeMANS)
     str(results)
 
 ## ----plot_c, echo = TRUE-------------------------------------------------
-    plot_key_run(results$catch/1E6, ylabel = "catch (millions individuals)", is.aggregated=F, rochet_GB_species, scales="free")
+    plot_key_run(results$catch/1E6, ylabel = "Catch (millions individuals)", speciesNames=rochet_GB_species, scales="free")
 
 
 ## ----plot_n, echo = TRUE-------------------------------------------------
-    plot_key_run(results$N/1E6, ylabel = "Abundance (millions individuals)", is.aggregated=T, rochet_GB_species, scales="free")
+    plot_key_run(results$N/1E6, ylabel = "Abundance (millions individuals)", is.aggregated=T, speciesNames=rochet_GB_species, scales="free")
 
 
 ## ----plot_m2, echo = TRUE------------------------------------------------
-    plot_key_run(results$M2, ylabel = "Predation mortality", is.aggregated=F, rochet_GB_species, scales="fixed")
+    plot_key_run(results$M2, ylabel = "Predation mortality", speciesNames=rochet_GB_species, scales="fixed")
 
 
 ## ----plot_suit, echo = TRUE----------------------------------------------
-    plot_key_run(results$suitability, ylabel = "Suitability", is.aggregated=F, rochet_GB_species, scales="free",speciesSuitability = "Forage fish")
+    plot_key_run(results$suitability, ylabel = "Suitability", speciesNames = rochet_GB_species, scales="free",speciesSuitability = "Forage fish",predOrPrey = "prey")
 
 
