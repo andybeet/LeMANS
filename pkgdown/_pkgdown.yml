@@ -1,0 +1,26 @@
+reference:
+  - title: Running code
+desc: Main files for running the model and plotting its output
+  contents:
+  - '`key_run`'
+  - '`plot_key_run`'
+  - title: Data
+desc: Data files included with package, taken from Rochet et al (2011)
+  contents:
+  - '`rochet_GB_foodweb`'
+- '`rochet_GB_initialValues`'
+- '`rochet_GB_modelSetup`'
+- '`rochet_GB_parameterValues`'
+- '`rochet_GB_species`'
+  -title: Intermediate
+desc: Intermediate functions called by key_run. The user can override this function if they choose
+  - '`calc_F`'
+- '`calc_M1`'
+- '`calc_M2_c`'
+- '`calc_maturity`'
+- '`calc_phi`'
+- '`calc_population_growth`'
+- '`calc_ration`'
+- '`calc_recruits`'
+- '`calc_sizepref_suitability`'
+
