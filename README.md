@@ -8,7 +8,7 @@ Details of the model can be found in the follwing publications:
 
 Originally coded in MATLAB
 
-Commments/questions/bugs should be documented at [https://github.com/andybeet/LeMANS/issues](https://github.com/andybeet/LeMANS/issues)
+Commments/questions/bugs should be documented at [https://github.com/NOAA-EDAB/LeMANS/issues](https://github.com/NOAA-EDAB/LeMANS/issues)
 
 ## Features
 
@@ -26,7 +26,7 @@ Commments/questions/bugs should be documented at [https://github.com/andybeet/Le
 
 ``` r
 # build the package from github with vignettes
-devtools::install_github("andybeet/LeMANS",build_vignettes = TRUE)
+devtools::install_github("NOAA-EDAB/LeMANS",build_vignettes = TRUE)
 ```
 If you don't have devtools installed you will see an error "there is no package called 'devtools'"; if that happens install devtools with `install.packages("devtools")`.
 
