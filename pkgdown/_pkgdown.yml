@@ -3,8 +3,8 @@ url: https://noaa-edab.github.io/LeMANS/
 template:
   params:
     docsearch:
-      api_key: '9cad057f83a2f0db708091946b283205'
-      index_name: 'noaa-edab_lemans'
+      api_key: 9cad057f83a2f0db708091946b283205
+      index_name: noaa-edab_lemans
 
 
 reference:
