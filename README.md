@@ -1,10 +1,10 @@
 # LeMANS (Length-based Multispecies Analysis by Numerical Simulation)
 
-Details of the model can be found in the follwing publications:
+Details of the model can be found in the following publications:
 
-* Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.
+* Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359. doi: [https://doi.org/10.1139/f06-039](https://doi.org/10.1139/f06-039)
 
-* Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486
+* Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486. doi: [https://doi.org/10.1139/F10-159](https://doi.org/10.1139/F10-159)
 
 Originally coded in MATLAB
 
