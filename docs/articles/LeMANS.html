@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeMANS (Length-based Multispecies Analysis by Numerical Simulation) • LeMANS</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="LeMANS (Length-based Multispecies Analysis by Numerical Simulation)">
@@ -40,7 +41,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -54,12 +55,12 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/NOAA-EDAB/LeMANS">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
-<form class="navbar-form navbar-right" role="search">
+<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
         <div class="form-group">
           <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
@@ -73,6 +74,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -86,7 +88,7 @@
 
     
     
-<p>The LeMANS package is an implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) <a href="#pubs">publications</a>. The data provided (bundled with the package - lazily loaded) reflects the Georges Bank (USA) data described in the Rochet et al. paper.</p>
+<p>The LeMANS package is an implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) <a href="#pubs">publications</a>. The data provided (bundled with the package - lazily loaded) reflects the Georges Bank (USA) data described in the Rochet et al. paper.</p>
 <ul>
 <li><code>rochet_GB_modelSetup</code></li>
 <li><code>rochet_GB_parameterValues</code></li>
@@ -99,24 +101,24 @@
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>To run the model right out of the box:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/key_run.html">key_run</a></span>(<span class="dt">Ffull=</span><span class="fl">0.4</span>, <span class="dt">nYrs=</span><span class="dv">50</span>, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">    results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/key_run.html">key_run</a></span>(<span class="dt">Ffull=</span><span class="fl">0.4</span>, <span class="dt">nYrs=</span><span class="dv">50</span>, rochet_GB_modelSetup, rochet_GB_parameterValues, rochet_GB_initialValues, rochet_GB_foodweb, rochet_GB_species)</a></code></pre></div>
 <p><code>results</code> is a list of several output variables (catch, recruits, M1, M2, F, spawning stock biomass, N, and more).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(results)
-<span class="co">#&gt; List of 14</span>
-<span class="co">#&gt;  $ N                  : num [1:15, 1:22, 1:250] 6.47e+11 2.04e+11 9.15e+09 0.00 0.00 ...</span>
-<span class="co">#&gt;  $ M1                 : num [1:15, 1:22] 0.0546 0.0458 0.0442 0 0 ...</span>
-<span class="co">#&gt;  $ M2                 : num [1:15, 1:22, 1:250] 0.0216 0.0849 0.0997 0 0 ...</span>
-<span class="co">#&gt;  $ eF                 : num [1:15, 1:22] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ catch              : num [1:15, 1:22, 1:250] 0 0 0 NaN NaN NaN NaN NaN NaN NaN ...</span>
-<span class="co">#&gt;  $ SSB                : num [1:22, 1:50] 2576.55 2.01 95.2 28.57 31.88 ...</span>
-<span class="co">#&gt;  $ recruits           : num [1:22, 1:50] 4.06e+11 2.58e+06 2.03e+07 3.77e+07 3.41e+08 ...</span>
-<span class="co">#&gt;  $ modelTimeStep      : num 0.218</span>
-<span class="co">#&gt;  $ growthProportions  : num [1:15, 1:22] 0.03201 0.00587 0 0 0 ...</span>
-<span class="co">#&gt;  $ ration             : num [1:15, 1:22] 0.686 7.866 15.458 0 0 ...</span>
-<span class="co">#&gt;  $ growthEfficiency   : num [1:15, 1:22] 0.18486 0.04714 0.00102 0 0 ...</span>
-<span class="co">#&gt;  $ maturityProportions: num [1:15, 1:22] 0.00873 0.7437 1 0 0 ...</span>
-<span class="co">#&gt;  $ suitability        : num [1:330, 1:15, 1:22] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ sizePreference     : num [1:330, 1:15, 1:22] 0.193 0.889 0.844 0 0 ...</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">    <span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(results)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt; List of 14</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt;  $ N                  : num [1:15, 1:22, 1:250] 6.47e+11 2.04e+11 9.15e+09 0.00 0.00 ...</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt;  $ M1                 : num [1:15, 1:22] 0.0546 0.0458 0.0442 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt;  $ M2                 : num [1:15, 1:22, 1:250] 0.0216 0.0849 0.0997 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt;  $ eF                 : num [1:15, 1:22] 0 0 0 0 0 0 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt;  $ catch              : num [1:15, 1:22, 1:250] 0 0 0 NaN NaN NaN NaN NaN NaN NaN ...</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt;  $ SSB                : num [1:22, 1:50] 2576.55 2.01 95.2 28.57 31.88 ...</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt;  $ recruits           : num [1:22, 1:50] 4.06e+11 2.58e+06 2.03e+07 3.77e+07 3.41e+08 ...</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;  $ modelTimeStep      : num 0.218</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt;  $ growthProportions  : num [1:15, 1:22] 0.03201 0.00587 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt;  $ ration             : num [1:15, 1:22] 0.686 7.866 15.458 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt;  $ growthEfficiency   : num [1:15, 1:22] 0.18486 0.04714 0.00102 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt;  $ maturityProportions: num [1:15, 1:22] 0.00873 0.7437 1 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt;  $ suitability        : num [1:330, 1:15, 1:22] 0 0 0 0 0 0 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt;  $ sizePreference     : num [1:330, 1:15, 1:22] 0.193 0.889 0.844 0 0 ...</span></a></code></pre></div>
 <p><a href="#plotting">Plotting</a> routines help visualize these output variables</p>
 <p>Type <code><a href="../reference/key_run.html">?key_run</a></code> for more help</p>
 </div>
@@ -141,37 +143,25 @@
 <h2 class="hasAnchor">
 <a href="#plotting" class="anchor"></a>Plotting</h2>
 <p>Visualization of output is critical. A basic plotting tool is provided to view output. The user is encouraged to write their own plotting routines.</p>
-<div id="to-produce-a-plot-of-catch-by-species-for-each-size-class-with-all-of-the-species-yaxes-scaled-to-their-output" class="section level3">
-<h3 class="hasAnchor">
-<a href="#to-produce-a-plot-of-catch-by-species-for-each-size-class-with-all-of-the-species-yaxes-scaled-to-their-output" class="anchor"></a>To produce a plot of catch by species for each size class with all of the species yaxes scaled to their output:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>catch<span class="op">/</span><span class="fl">1E6</span>, <span class="dt">ylabel =</span> <span class="st">"Catch (millions individuals)"</span>, <span class="dt">speciesNames=</span>rochet_GB_species, <span class="dt">scales=</span><span class="st">"free"</span>)</code></pre></div>
+<p>###To produce a plot of catch by species for each size class with all of the species yaxes scaled to their output:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>catch<span class="op">/</span><span class="fl">1E6</span>, <span class="dt">ylabel =</span> <span class="st">"Catch (millions individuals)"</span>, <span class="dt">speciesNames=</span>rochet_GB_species, <span class="dt">scales=</span><span class="st">"free"</span>)</a></code></pre></div>
 <p><img src="LeMANS_files/figure-html/plot_c-1.png" width="768" style="display: block; margin: auto;"></p>
-</div>
-<div id="to-produce-a-plot-of-total-abundance-aggregated-over-each-size-class-with-species-yaxes-fixed-across-all-species" class="section level3">
-<h3 class="hasAnchor">
-<a href="#to-produce-a-plot-of-total-abundance-aggregated-over-each-size-class-with-species-yaxes-fixed-across-all-species" class="anchor"></a>To produce a plot of total abundance aggregated over each size class with species yaxes fixed across all species:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>N<span class="op">/</span><span class="fl">1E6</span>, <span class="dt">ylabel =</span> <span class="st">"Abundance (millions individuals)"</span>, <span class="dt">is.aggregated=</span>T, <span class="dt">speciesNames=</span>rochet_GB_species, <span class="dt">scales=</span><span class="st">"free"</span>)</code></pre></div>
+<p>###To produce a plot of total abundance aggregated over each size class with species yaxes fixed across all species:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>N<span class="op">/</span><span class="fl">1E6</span>, <span class="dt">ylabel =</span> <span class="st">"Abundance (millions individuals)"</span>, <span class="dt">is.aggregated=</span>T, <span class="dt">speciesNames=</span>rochet_GB_species, <span class="dt">scales=</span><span class="st">"free"</span>)</a></code></pre></div>
 <p><img src="LeMANS_files/figure-html/plot_n-1.png" width="768" style="display: block; margin: auto;"></p>
-</div>
-<div id="to-produce-a-plot-of-m2-predation-for-each-size-class-with-species-yaxes-fixed-across-all-species" class="section level3">
-<h3 class="hasAnchor">
-<a href="#to-produce-a-plot-of-m2-predation-for-each-size-class-with-species-yaxes-fixed-across-all-species" class="anchor"></a>To produce a plot of M2 predation for each size class with species yaxes fixed across all species:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>M2, <span class="dt">ylabel =</span> <span class="st">"Predation mortality"</span>, <span class="dt">speciesNames=</span>rochet_GB_species, <span class="dt">scales=</span><span class="st">"fixed"</span>)</code></pre></div>
+<p>###To produce a plot of M2 predation for each size class with species yaxes fixed across all species:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>M2, <span class="dt">ylabel =</span> <span class="st">"Predation mortality"</span>, <span class="dt">speciesNames=</span>rochet_GB_species, <span class="dt">scales=</span><span class="st">"fixed"</span>)</a></code></pre></div>
 <p><img src="LeMANS_files/figure-html/plot_m2-1.png" width="768" style="display: block; margin: auto;"></p>
-</div>
-<div id="to-produce-a-plot-of-the-suitability-forage-fish-to-other-species-in-the-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#to-produce-a-plot-of-the-suitability-forage-fish-to-other-species-in-the-model" class="anchor"></a>To produce a plot of the suitability forage fish to other species in the model:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>suitability, <span class="dt">ylabel =</span> <span class="st">"Suitability"</span>, <span class="dt">speciesNames =</span> rochet_GB_species, <span class="dt">scales=</span><span class="st">"free"</span>,<span class="dt">speciesSuitability =</span> <span class="st">"Forage fish"</span>,<span class="dt">predOrPrey =</span> <span class="st">"prey"</span>)</code></pre></div>
+<p>###To produce a plot of the suitability forage fish to other species in the model:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">    <span class="kw"><a href="../reference/plot_key_run.html">plot_key_run</a></span>(results<span class="op">$</span>suitability, <span class="dt">ylabel =</span> <span class="st">"Suitability"</span>, <span class="dt">speciesNames =</span> rochet_GB_species, <span class="dt">scales=</span><span class="st">"free"</span>,<span class="dt">speciesSuitability =</span> <span class="st">"Forage fish"</span>,<span class="dt">predOrPrey =</span> <span class="st">"prey"</span>)</a></code></pre></div>
 <p><img src="LeMANS_files/figure-html/plot_suit-1.png" width="768" style="display: block; margin: auto;"></p>
-</div>
 </div>
 <div id="pubs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pubs" class="anchor"></a>Publications</h2>
 <ul>
-<li><p>Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.</p></li>
-<li><p>Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486</p></li>
+<li><p>Hall et al. (2006). A length-based multispecies model for evaluating community responses to fishing. Can. J. Fish. Aquat. Sci. 63:1344-1359.</p></li>
+<li><p>Rochet et al. (2011). Does selective fishing conserve community biodiversity? Prediction from a length-based multispecies model. Can. J. Fish. Aquat. Sci. 68:469-486</p></li>
 </ul>
 </div>
   </div>
@@ -192,13 +182,15 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Andy Beet.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
