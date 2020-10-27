@@ -2,7 +2,11 @@ Package: LeMANS
 Type: Package
 Title: length-based multispecies analysis by numerical simulation (LeMANS)
 Version: 1.0.0
-Authors@R: person("Andy","Beet",email="andrew.beet@noaa.gov",role=c("aut","cre"))
+Authors@R: person(given = "Andy",
+                  family = "Beet",
+                  email="andrew.beet@noaa.gov",
+                  role=c("aut","cre"),
+                  comment = c(ORCID="0000-0001-8270-7090"))
 Description: An implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) publications.
 URL: https://github.com/NOAA-EDAB/LeMANS
 BugReports: https://github.com/NOAA-EDAB/LeMANS/issues
