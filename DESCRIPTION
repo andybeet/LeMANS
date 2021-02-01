@@ -10,7 +10,7 @@ Authors@R: person(given = "Andy",
 Description: An implementation of the LeMANS model as described in the Hall et al (2006) and Rochet et al (2011) publications.
 URL: https://github.com/NOAA-EDAB/LeMANS
 BugReports: https://github.com/NOAA-EDAB/LeMANS/issues
-License: GPL-2
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
