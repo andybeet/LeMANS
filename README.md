@@ -1,8 +1,7 @@
 # LeMANS (Length-based Multispecies Analysis by Numerical Simulation)
 
-![deploy to github pages](https://github.com/NOAA-EDAB/LeMANS/workflows/deploy%20to%20github%20pages/badge.svg)
-![Install on windows](https://github.com/NOAA-EDAB/LeMANS/workflows/Install%20on%20windows/badge.svg)
-![gitleaks](https://github.com/NOAA-EDAB/LeMANS/workflows/gitleaks/badge.svg)
+![deploy to github pages](https://github.com/andybeet/LeMANS/workflows/deploy%20to%20github%20pages/badge.svg)
+![gitleaks](https://github.com/andybeet/LeMANS/workflows/gitleaks/badge.svg)
 
 Details of the model can be found in the following publications:
 
