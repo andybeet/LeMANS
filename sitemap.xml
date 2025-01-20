@@ -1,75 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/404.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/articles/LeMANS.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/index.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_F.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_M1.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_M2_c.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_maturity.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_phi.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_population_growth.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_ration.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_recruits.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/calc_sizepref_suitability.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/key_run.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/lemans.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/plot_key_run.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_foodweb.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_initialValues.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_modelSetup.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_parameterValues.html</loc>
-  </url>
-  <url>
-    <loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_species.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://noaa-edab.github.io/LeMANS/404.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/LICENSE-text.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/articles/LeMANS.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/articles/index.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/authors.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/index.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_F.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_M1.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_M2_c.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_maturity.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_phi.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_population_growth.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_ration.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_recruits.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/calc_sizepref_suitability.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/index.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/key_run.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/lemans.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/plot_key_run.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_foodweb.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_initialValues.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_modelSetup.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_parameterValues.html</loc></url>
+<url><loc>https://noaa-edab.github.io/LeMANS/reference/rochet_GB_species.html</loc></url>
 </urlset>
+
